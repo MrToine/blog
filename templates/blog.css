@@ -1,0 +1,25 @@
+.blog_name{
+	
+	font-size: 18pt;
+	text-align: center;
+
+}
+
+ul.blog_user_menu > li {
+
+	display: inline-block;
+	width: 22%;
+	height: 100px;
+	margin: 2px;
+	list-style-type: none;
+	vertical-align: top;
+	padding: 3px;
+	text-align: center;
+
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	border-top: 2px solid #366393;
+	background: rgba(0,0,0, 0.3);
+
+}
