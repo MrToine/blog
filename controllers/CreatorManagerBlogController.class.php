@@ -28,6 +28,8 @@
 
 class CreatorManagerBlogController extends ModuleController {
 
+	/* EN PLEIN AMENAGEMENT */
+
 	private $view,
 			$blog_name,
 			$blog_id,
@@ -44,8 +46,6 @@ class CreatorManagerBlogController extends ModuleController {
 		));
 
 		$result = (int) $result;
-
-		var_dump($result);
 
 		if($result > 0 ) {
 			print_r('Vrai.');
