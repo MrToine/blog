@@ -34,13 +34,14 @@ $url_controller_mappers = array(
 	new UrlControllerMapper('AdminBlogManageController', '`^/admin/manage`'),
 
 	//Manager
-	new UrlControllerMapper('BlogCreateController', '`^/create`'),
-	new UrlControllerMapper('CreatorManagerBlogController', '`^/user(?:/([0-9]+))?/manager`', array('user_id')),
+	new UrlControllerMapper('CreatorBlogController', '`^/creator`'),
+	new UrlControllerMapper('BlogManagerController', '`^/user(?:/([0-9]+))?/manager`', array('user_id')),
 	
 	//Display
 	new UrlControllerMapper('BlogPostController', '`^/post(?:/([0-9]+)-([a-z0-9-_]+))?/?$`', array('post_slug')),
+	new UrlControllerMapper('BlogPostController', '`^/post(?:/([a-z0-9-_]+))?/?`', array('post_slug')),
 	new UrlControllerMapper('BlogUserController', '`^/user(?:/([0-9]+))?/?$`', array('user_id')),
-	new UrlControllerMapper('BlogController', '`^.*$`'),
+	new UrlControllerMapper('BlogController', '`^.*$`')
 
 );
  

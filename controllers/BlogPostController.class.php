@@ -36,17 +36,16 @@ class BlogPostController extends ModuleController {
 	public function execute(HTTPRequestCustom $request)
 	{
 
-		$this->blog_post = $request->get_getint('post_slug');
-		$this->blog_name = $this->get_blog()->get_name();
+		$this->blog_post = $request->get_getstring('post_slug');
+		
 
 		$this->init();
 
 		$result = BlogService::get_blog_articles($this->blog_post);
-
 		$post = new BlogUser();
 		$post->set_properties($result);
 
-		/* Comments */
+		/* Comments */ 
 
 		$comments_topic = new BlogCommentsTopic();
 		$comments_topic->set_id_in_module($post->get_id());
@@ -60,7 +59,7 @@ class BlogPostController extends ModuleController {
 				'CREATED' => date('d/m/Y', $post->get_created()),
 				'APPROVED' => $post->get_approved(),
 
-				'USER' => $result['login'],
+				'USER' => $result['display_name'],
 				'LINK_USER_PROFILE' => UserUrlBuilder::profile($result['user_id'])->absolute(),
 				'USER_ID' => $result['user_id'],
 				'USER_LEVEL_CLASS' => UserService::get_level_class($result['level']),

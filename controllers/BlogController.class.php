@@ -29,29 +29,28 @@ class BlogController extends ModuleController {
 	
 	private $view,
 			$lang;
-	
+
 	public function execute(HTTPRequestCustom $request)
 	{
 		$this->init();
 		
-		$result = PersistenceContext::get_querier()->select_rows(
-			PREFIX.'blog', array(
-				'id, author_id, name, description, created, approved, user_id, login, level'
-			),
-			'LEFT JOIN '.DB_TABLE_MEMBER.' ON user_id = author_id'
-		);
+		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog.author_id');
 
 		while ($row = $result->fetch())
 		{
 
 			$blog = new Blog();
 			$blog->set_properties($row);
-			
-			$this->view->assign_block_vars('blog', $blog->get_array_tpl_vars());
-			$this->view->put('USER', $row['login']);
-			$this->view->put('LINK_USER_PROFILE', UserUrlBuilder::profile($row['user_id'])->absolute());
-			$this->view->put('USER_ID', $row['user_id']);
-			$this->view->put('USER_LEVEL_CLASS', UserService::get_level_class($row['level']));
+
+			$link_to_blog = HOST.'/users/'.$blog->get_author_id();
+
+			$this->view->assign_block_vars('blog', $blog->get_array_tpl_vars(), array(
+				'LINK_BLOG_USER'=> $link_to_blog,
+				'USERNAME' => $row['display_name'],
+				'LINK_USER_PROFILE'=> UserUrlBuilder::profile($row['user_id'])->absolute(),
+				'USER_ID'=> $row['user_id'],
+				'USER_LEVEL_CLASS'=> UserService::get_level_class($row['level'])
+			));
 
 		}
 		

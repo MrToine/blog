@@ -28,7 +28,7 @@
 class Blog {
 
 	private $_id,
-			$_user_id,
+			$_author_id,
 			$_name,
 			$_description,
 			$_created,
@@ -40,9 +40,9 @@ class Blog {
 
 	}
 
-	public function get_user_id(){
+	public function get_author_id(){
 
-		return $this->_user_id;
+		return $this->_author_id;
 
 	}
 
@@ -82,13 +82,13 @@ class Blog {
 
 	}
 
-	public function set_user_id($user_id){
+	public function set_author_id($author_id){
 
-		$user_id = (int) $user_id;
+		$author_id = (int) $author_id;
 
-		if($user_id > 0){
+		if($author_id > 0){
 
-			$this->_user_id = $user_id;
+			$this->_author_id = $author_id;
 
 		}
 
@@ -136,14 +136,15 @@ class Blog {
 
 	public function is_authorized_edit()
 	{
-		return BlogAuthorizationsService::check_authorizations()->moderation() || (BlogAuthorizationsService::check_authorizations()->write() && $this->get_author_user()->get_id() == AppContext::get_current_user()->get_id() && AppContext::get_current_user()->check_level(User::MEMBER_LEVEL));
+		/*return BlogAuthorizationsService::check_authorizations()->moderation() || (BlogAuthorizationsService::check_authorizations()->write() && $this->get_author_user()->get_id() == AppContext::get_current_user()->get_id() && AppContext::get_current_user()->check_level(User::MEMBER_LEVEL));*/
+		return BlogAuthorizationsService::check_authorizations()->moderation() || ((BlogAuthorizationsService::check_authorizations()->write() /*|| (BlogAuthorizationsService::check_authorizations()->contribution() && !$this->is_visible()))*/ && $this->get_author_id() == AppContext::get_current_user()->get_id() && AppContext::get_current_user()->check_level(User::MEMBER_LEVEL)));
 	}
 
 	public function get_properties()
 	{
 		return array(
 			'id' => $this->get_id(),
-			'user_id' => $this->get_user_id(),
+			'author_id' => $this->get_author_id(),
 			'name' => TextHelper::htmlspecialchars($this->get_name()),
 			'description' => TextHelper::htmlspecialchars($this->get_description()),
 			'created' => TextHelper::htmlspecialchars($this->get_created()),
@@ -154,7 +155,7 @@ class Blog {
 	public function set_properties(array $properties)
 	{
 		$this->_id = $properties['id'];
-		$this->_user_id = $properties['author_id'];
+		$this->_author_id = $properties['author_id'];
 		$this->_name = $properties['name'];
 		$this->_description = $properties['description'];
 		$this->_created = $properties['created'];
@@ -167,7 +168,7 @@ class Blog {
 		return array(
 			'C_EDIT' => $this->is_authorized_edit(),
 			'ID' => $this->_id,
-			'USER_ID' => $this->_user_id,
+			'author_id' => $this->_author_id,
 			'NAME' => $this->_name,
 			'DESCRIPTION' => $this->_description,
 			'CREATED' => date('d/m/Y', $this->_created),

@@ -32,5 +32,5 @@
 
 $lang = array(
 	'blog.blog_name' => 'Mon 1er Blog',
-	'blog.blog_description' => 'Mon premier blog ! Un article ‡ ÈtÈ crÈer pour vous lister les possibilitÈs.',
+	'blog.blog_description' => 'Mon premier blog ! Un article √† √©t√© cr√©er pour vous lister les possibilit√©s.',
 );

@@ -31,6 +31,16 @@ class BlogUserController extends ModuleController {
 			$blog_name,
 			$blog_id,
 			$lang;
+
+	public function test($var){
+		if($var != null){
+			echo '<pre>';
+			print_r($var);
+			echo '</pre>';
+		}else{
+			echo 'Variable not found !';
+		}
+	}
 	
 	public function execute(HTTPRequestCustom $request)
 	{
@@ -40,17 +50,13 @@ class BlogUserController extends ModuleController {
 
 		$this->init();
 
-		$result = PersistenceContext::get_querier()->select_rows(
-			PREFIX.'blog_articles', array(
-				'id, blog_id, author_id, name, slug, content, created, approved, user_id, login, level'
-			),
-			'LEFT JOIN '.DB_TABLE_MEMBER.' ON user_id = author_id WHERE blog_id = :id ORDER BY created DESC',
+		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id',
 			array('id' => $this->blog_id)
 		);
 
 		while ($row = $result->fetch())
 		{
-
+			
 			$blog = new BlogUser();
 			$blog->set_properties($row);
 			
@@ -58,7 +64,7 @@ class BlogUserController extends ModuleController {
 
 			$this->view->put_all(array(
 				'BLOG_NAME' => $this->blog_name,
-				'USER' => $row['login'],
+				'USER' => $row['display_name'],
 				'LINK_USER_PROFILE' => UserUrlBuilder::profile($row['user_id'])->absolute(),
 				'USER_ID' => $row['user_id'],
 				'USER_LEVEL_CLASS' => UserService::get_level_class($row['level']),

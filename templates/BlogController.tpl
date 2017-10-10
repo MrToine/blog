@@ -10,7 +10,7 @@
 				# IF blog.APPROVED #
 					<tr>
 						<td>
-							<a href="{LINK_USER_PROFILE}" class="{USER_LEVEL_CLASS}" # IF C_USER_GROUP_COLOR # style="color:{USER_GROUP_COLOR}" # ENDIF #>{USER}</a>
+							<a href="{blog.LINK_USER_PROFILE}" class="{blog.USER_LEVEL_CLASS}" # IF C_USER_GROUP_COLOR # style="color:{USER_GROUP_COLOR}" # ENDIF #>{blog.USERNAME}</a>
 						</td>
 						<td style="text-align:left;"><a href="{LINK_BLOG_USER}/{blog.ID}">{blog.NAME}</a><br /><small><em>{blog.DESCRIPTION}</em></small></td>
 						<td>{blog.CREATED}</td>

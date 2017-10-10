@@ -35,6 +35,15 @@ class BlogService
 		self::$db_querier = PersistenceContext::get_querier();
 	}
 	
+	public static function test($var, $bool = true){
+		echo '<pre>';
+		var_dump($var);
+		echo '</pre>';
+		if($bool){
+			die();
+		}
+	}
+
 	public static function get_blog($blog_id)
 	{
 
@@ -48,9 +57,7 @@ class BlogService
 
 	public static function get_blog_articles($post_slug) {
 
-		$result = PersistenceContext::get_querier()->select_single_row_query('SELECT blog_articles.*, member.*
-		FROM '.PREFIX.'blog_articles blog_articles
-		LEFT JOIN '.DB_TABLE_MEMBER.' member ON member.user_id = blog_articles.author_id WHERE blog_articles.slug = :slug', array('slug' => $post_slug));
+		$result = self::$db_querier->select_single_row_query('SELECT * FROM '.PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id WHERE '.PREFIX.'blog_articles.slug=:slug', array('slug' => $post_slug));
 
 		return $result;
 

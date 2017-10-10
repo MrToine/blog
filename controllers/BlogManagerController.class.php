@@ -1,6 +1,7 @@
+
 <?php
 /*##################################################
- *                                 BlogManagerController.class.php
+ *                           CreatorManageBlog.class.php
  *                            -------------------
  *   begin                : November 17, 2014
  *   copyright            : (C) 2014 Anthony VIOLET
@@ -13,7 +14,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -26,7 +27,9 @@
  ###################################################*/
 
 class BlogManagerController extends ModuleController {
-	
+
+	/* EN PLEIN AMENAGEMENT */
+
 	private $view,
 			$blog_name,
 			$blog_id,
@@ -44,18 +47,13 @@ class BlogManagerController extends ModuleController {
 
 		$result = (int) $result;
 
-		var_dump($result);
-
-		if($result > 0 ) {
-
-			$this->view->put('C_RESULT' => true);
-
+		/* On compte le nombre d'articles dans le blog de l'uilisateur
+		if($result > 0){
+			$this->view->put('C_RESULT', True);
 		}else{
+			$this->view->put('C_RESULT', False);
+		}*/
 
-			$this->view->put('C_RESULT', false);
-
-		}
-		
 		$this->init();
 
 		return $this->generate_response();
@@ -76,4 +74,5 @@ class BlogManagerController extends ModuleController {
 		
 		return $response;
 	}
+
 }

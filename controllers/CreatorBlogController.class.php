@@ -13,7 +13,6 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -26,7 +25,7 @@
  *
  ###################################################*/
 
-class CreatorManagerBlogController extends ModuleController {
+class CreatorBlogController extends ModuleController {
 
 	/* EN PLEIN AMENAGEMENT */
 
@@ -36,11 +35,28 @@ class CreatorManagerBlogController extends ModuleController {
 			$lang;
 	
 	public function execute(HTTPRequestCustom $request){
-		die();
+
 		$this->init();
 
 		$user = AppContext::get_current_user();
-		BlogService::test($user);
+		if($user->check_level(User::MEMBER_LEVEL)){
+			$this->view->put_all(array('USER_CONNECTED' => True));
+		}else{
+			$this->view->put_all(array('USER_CONNECTED' => False));
+		}
+
+		$form = $this->build_form();
+
+		if ($this->submit_button->has_been_submited())
+		{
+			if ($form->validate())
+			{
+
+				die('ok');
+			}
+		}
+
+		$this->view->put('form', $form->display());
 
 		return $this->generate_response();
 	}
@@ -50,6 +66,28 @@ class CreatorManagerBlogController extends ModuleController {
 		$this->lang = LangLoader::get('common', 'blog');
 		$this->view = new FileTemplate('blog/CreatorBlogManagerController.tpl');
 		$this->view->add_lang($this->lang);
+	}
+
+	private function build_form(){
+
+		$form = new HTMLForm('CreateBlogForm');
+
+		// FIELDSET
+		$fieldset = new FormFieldsetHTML('fieldset', 'Créer mon Blog !');
+		$form->add_fieldset($fieldset);
+		
+		// INFOS
+		$fieldset->add_field(new FormFieldTextEditor('name', $this->lang['creator.blog_name'], '', array(
+			'maxlength' => 25, 'description' => $this->lang['creator.blog_name_desc'], 'required' => true)
+		));
+
+		// BUTTONS
+		$buttons_fieldset = new FormFieldsetSubmit('buttons');
+		$this->submit_button = new FormButtonDefaultSubmit();
+		$buttons_fieldset->add_element($this->submit_button);
+		$form->add_fieldset($buttons_fieldset);
+		
+		return $form;
 	}
 	
 	private function generate_response(){

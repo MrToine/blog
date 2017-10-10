@@ -38,7 +38,7 @@ $lang = array(
 	// Liste des blogs
 	'head_user' => 'Auteur du blog',
 	'head_name' => 'Nom & descrption',
-	'head_created' => 'Créer le',
+	'head_created' => 'CrÃ©er le',
 	'link_blog_user' => BlogUrlBuilder::blog_user()->absolute(),
 
 	// Liste des articles
@@ -49,17 +49,20 @@ $lang = array(
 
 	// Module mini
 	'module_mini_title' => 'Gestionnaire de blog',
-	'manage_a_blog' => 'Gérer un blog',
+	'manage_a_blog' => 'GÃ©rer mon blog',
 	'create_a_blog_link' => BlogUrlBuilder::create_blog()->absolute(),
-	'create_a_blog' => 'Créer un blog',
+	'create_a_blog' => 'CrÃ©er un blog',
 	'blogs_list_link' => BlogUrlBuilder::home()->absolute(),
 	'blogs_list' => 'Liste des blogs',
 
 	// Manager du blog
-	'manager_head_message' => 'Vous êtes dans l\'administration de votre blog. Vous pouvez ici, gérer l\'ensemble des options. Créer, modifier, supprimer des articles. Gérer l\'apparence et le contenu de votre blog.',
+	'manager_head_message' => 'Vous Ãªtes dans l\'administration de votre blog. Vous pouvez ici, gÃ©rer l\'ensemble des options. CrÃ©er, modifier, supprimer des articles. GÃ©rer l\'apparence et le contenu de votre blog.',
 	'admin_blog' => 'Administration du blog',
-	'create_post' => 'Créer un billet',
-	'manage_posts' => 'Gérer les billets',
+	'create_post' => 'CrÃ©er un billet',
+	'manage_posts' => 'GÃ©rer les billets',
 	'delete_blog' => 'Supprimer mon blog',
 
+	// CrÃ©er un blog
+	'creator.blog_name' => 'Nom du blog',
+	'creator.blog_name_desc' => 'Indiquez le nom de votre blog',
 );
