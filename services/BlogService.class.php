@@ -76,5 +76,11 @@ class BlogService
 		return $find;
 	}
 
+	public static function create_post(BlogUser $post){
+		self::test($post);
+		$result = self::$db_querier->insert(PREFIX.'blog_articles', $blog->get_properties());
+		return $result->get_last_inserted_id();
+	}
+
 }
 ?>

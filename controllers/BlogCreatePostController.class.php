@@ -30,14 +30,17 @@ class BlogCreatePostController extends ModuleController {
 	private $lang,
 			$view,
 			$blog_author_id,
-			$user;
+			$user,
+			$post;
 
 	public function execute(HTTPRequestCustom $request){
 
-		$this->blog_author_id = $request->get_getint('user_id');
+		$this->blog_id = $request->get_getint('blog_id');
 		$this->init();
 
 		$this->user = AppContext::get_current_user();
+
+		$this->blog_author_id = BlogService::get_blog($this->blog_id)->get_author_id();
 
 		if($this->blog_author_id == $this->user->get_id()){
 			$this->view->put('IS_AUTHOR_BLOG', True);
@@ -47,6 +50,22 @@ class BlogCreatePostController extends ModuleController {
 
 		if($this->submit_button->has_been_submited()){
 			if($form->validate()){
+				if($form->get_value('publied') == True){
+					$approved = 1;
+				}else{
+					$approved = 0;
+				}
+				$this->post = new BlogUser();
+				$this->post->set_properties(array(
+					'blog_id' => $this->blog_id,
+					'author_id' => $this->user->get_id(),
+					'name' => $form->get_value('title'),
+					'slug' => 'blabla',
+					'content' => $form->get_value('content'),
+					'created' => time(),
+					'approved' => $approved
+				));
+			    BlogService::create_post($this->post);
 				$this->view->put('FORM_OK', True);
 			}
 		}

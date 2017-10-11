@@ -1,0 +1,4 @@
+-->A faire 
+
+je me suis arrêter a la création d'un billet. Il faut repérer l'erreur (dans BlogService) -- Surement a voir avec BlogUser.class
+L'erreur actuelle viens de get_properties() qui ne peut pas etre null. 11-10-2017
