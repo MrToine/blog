@@ -45,6 +45,12 @@ class BlogCreatePostController extends ModuleController {
 
 		$form = $this->build_form();
 
+		if($this->submit_button->has_been_submited()){
+			if($form->validate()){
+				$this->view->put('FORM_OK', True);
+			}
+		}
+
 		$this->view->put('form', $form->display());
 
 		return $this->generate_response();
@@ -74,10 +80,10 @@ class BlogCreatePostController extends ModuleController {
 			'required' => True
 		)));
 
-		$buttons_fieldset = new FormFieldSubmit('buttons');
+		$buttons_fieldset = new FormFieldsetSubmit('buttons');
 		$this->submit_button = new FormButtonDefaultSubmit();
 		$buttons_fieldset->add_element($this->submit_button);
-		$form->add_fieldset($this->submit_button);
+		$form->add_fieldset($buttons_fieldset);
 
 		return $form;
 	}
