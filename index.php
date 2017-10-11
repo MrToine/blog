@@ -39,6 +39,7 @@ $url_controller_mappers = array(
 
 	//Manager
 	new UrlControllerMapper('CreatorBlogController', '`^/creator`'),
+	new UrlControllerMapper('BlogCreatePostController', '`^/user(?:/([0-9]+))?/manager/create`', array('user_id')),
 	new UrlControllerMapper('BlogManagerController', '`^/user(?:/([0-9]+))?/manager`', array('user_id')),
 	
 	//Display

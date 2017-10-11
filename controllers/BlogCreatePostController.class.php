@@ -1,6 +1,6 @@
 <?php
 /*##################################################
- *                           CreatorManageBlog.class.php
+ *                           BlogCreatePostController.class.php
  *                            -------------------
  *   begin                : November 17, 2014
  *   copyright            : (C) 2014 Anthony VIOLET
@@ -25,60 +25,68 @@
  *
  ###################################################*/
 
-class BlogManagerController extends ModuleController {
+class BlogCreatePostController extends ModuleController {
 
-	/* EN PLEIN AMENAGEMENT */
-
-	private $view,
-			$blog_name,
+	private $lang,
+			$view,
 			$blog_author_id,
-			$lang,
 			$user;
-	
+
 	public function execute(HTTPRequestCustom $request){
 
 		$this->blog_author_id = $request->get_getint('user_id');
-
 		$this->init();
 
 		$this->user = AppContext::get_current_user();
 
-		if($this->user->get_id() == $this->blog_author_id){
+		if($this->blog_author_id == $this->user->get_id()){
 			$this->view->put('IS_AUTHOR_BLOG', True);
-		}else{
-			die('pas ton blog');
 		}
-		
-		$result = PersistenceContext::get_querier()->count(PREFIX.'blog', 'WHERE author_id=:user_id', array(
-			'user_id' => $this->user->get_id()
-		));
 
-		$result = (int) $result;
+		$form = $this->build_form();
 
-		/* On compte le nombre d'articles dans le blog de l'uilisateur
-		if($result > 0){
-			$this->view->put('C_RESULT', True);
-		}else{
-			$this->view->put('C_RESULT', False);
-		}*/
+		$this->view->put('form', $form->display());
 
 		return $this->generate_response();
 	}
-	
-	private function init()
-	{
+
+	private function init(){
 		$this->lang = LangLoader::get('common', 'blog');
-		$this->view = new FileTemplate('blog/BlogManagerController.tpl');
+		$this->view = new FileTemplate('blog/BlogCreatePostController.tpl');
 		$this->view->add_lang($this->lang);
 	}
-	
-	private function generate_response()
-	{
+
+	private function build_form(){
+
+		$form = new HTMLForm('CreatePostForm');
+
+		$fieldset = new FormFieldsetHTML('fieldset', 'Créer un billet');
+		$form->add_fieldset($fieldset);
+
+		$fieldset->add_field(new FormFieldTextEditor('title', $this->lang['manager.form.title'], '', array(
+			'maxlength' => 255,
+			'description' => $this->lang['manager.form.title_desc'],
+			'required' => True
+		)));
+
+		$fieldset->add_field(new FormFieldCheckbox('publied', $this->lang['manager.form.publied'], FormFieldCheckbox::CHECKED));
+		$fieldset->add_field(new FormFieldRichTextEditor('content', $this->lang['manager.form.content'], '', array(
+			'required' => True
+		)));
+
+		$buttons_fieldset = new FormFieldSubmit('buttons');
+		$this->submit_button = new FormButtonDefaultSubmit();
+		$buttons_fieldset->add_element($this->submit_button);
+		$form->add_fieldset($this->submit_button);
+
+		return $form;
+	}
+
+	private function generate_response(){
 		$response = new SiteDisplayResponse($this->view);
 		$graphical_environment = $response->get_graphical_environment();
 		$graphical_environment->set_page_title($this->lang['module_title']);
-		
+
 		return $response;
 	}
-
 }

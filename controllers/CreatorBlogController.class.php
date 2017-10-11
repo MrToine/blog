@@ -92,7 +92,7 @@ class CreatorBlogController extends ModuleController {
 		
 		// INFOS
 		$fieldset->add_field(new FormFieldTextEditor('name', $this->lang['creator.blog_name'], '', array(
-			'maxlength' => 25, 'description' => $this->lang['creator.blog_name_desc'], 'required' => true)
+			'maxlength' => 255, 'description' => $this->lang['creator.blog_name_desc'], 'required' => true)
 		));
 		// DESCRIPTION
 		$fieldset->add_field(new FormFieldRichTextEditor('description', $this->lang['creator.description'], '', array('required' => true)));

@@ -69,6 +69,13 @@ $lang = array(
 	'manager.manage_posts_link' => '#',
 	'manager.delete_blog' => 'Supprimer mon blog',
 	'manager.delete_blog_link' => '#',
+	//-->Formulaire
+	'manager.form.title' => 'Titre du billet',
+	'manager.form.title_desc' => 'Indiquez le titre du billet (max 255 caractères)',
+	'manager.form.slug' => 'Réecrire l\'url',
+	'manager.form.slug_desc' => 'Contient uniquement des lettres minuscules, des chiffres et des traits d\'union',
+	'manager.form.content' => 'Contenu du billet',
+	'manager.form.publied' => 'Publié le billet directement ?',
 
 	// Créer un blog
 	'creator.blog_name' => 'Nom du blog',
