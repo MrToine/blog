@@ -45,6 +45,7 @@ class BlogController extends ModuleController {
 			$link_to_blog = HOST.'/users/'.$blog->get_author_id();
 
 			$this->view->assign_block_vars('blog', $blog->get_array_tpl_vars(), array(
+				'CREATED' => $blog->get_created()->get_timestamp(),
 				'LINK_BLOG_USER'=> $link_to_blog,
 				'USERNAME' => $row['display_name'],
 				'LINK_USER_PROFILE'=> UserUrlBuilder::profile($row['user_id'])->absolute(),

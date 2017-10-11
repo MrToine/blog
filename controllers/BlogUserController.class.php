@@ -30,17 +30,8 @@ class BlogUserController extends ModuleController {
 	private $view,
 			$blog_name,
 			$blog_id,
-			$lang;
-
-	public function test($var){
-		if($var != null){
-			echo '<pre>';
-			print_r($var);
-			echo '</pre>';
-		}else{
-			echo 'Variable not found !';
-		}
-	}
+			$lang, 
+			$user;
 	
 	public function execute(HTTPRequestCustom $request)
 	{
@@ -50,17 +41,23 @@ class BlogUserController extends ModuleController {
 
 		$this->init();
 
-		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id',
+		$this->user = AppContext::get_current_user();
+
+		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id WHERE blog_id=:id',
 			array('id' => $this->blog_id)
 		);
 
 		while ($row = $result->fetch())
 		{
-			
+
 			$blog = new BlogUser();
 			$blog->set_properties($row);
 			
 			$this->view->assign_block_vars('blogUserPost', $blog->get_array_tpl_vars());
+
+			if($this->user->get_id() == $blog->get_author_id()){
+				$this->view->put('IS_AUTHOR_BLOG', True);
+			}
 
 			$this->view->put_all(array(
 				'BLOG_NAME' => $this->blog_name,

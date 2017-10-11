@@ -28,6 +28,10 @@
 define('PATH_TO_ROOT', '..');
  
 require_once PATH_TO_ROOT . '/kernel/init.php';
+
+//Supprime les menus.
+ThemesManager::get_theme(AppContext::get_current_user()->get_theme())->get_columns_disabled()->set_disable_left_columns(true);
+ThemesManager::get_theme(AppContext::get_current_user()->get_theme())->get_columns_disabled()->set_disable_right_columns(true);
  
 $url_controller_mappers = array(
 	//Admin

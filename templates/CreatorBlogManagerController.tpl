@@ -1,5 +1,5 @@
 # IF USER_CONNECTED #
 	# INCLUDE form #
 # ELSE #
-	Il faut créer un compte sur le site pour créer un blog :/
+	<div class="error">{@creator.no_connected}</div>
 # ENDIF #

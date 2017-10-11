@@ -33,7 +33,11 @@
 $lang = array(
 	// Pages title
 	'module_title' => 'Blogs',
-	'add_page' => 'Add',
+	'add_page' => 'Ajouter',
+	'create_blog' => 'Créer mon blog',
+
+	//->Liens administation
+	'admin.config' => 'Configuration des blogs',
 
 	// Liste des blogs
 	'head_user' => 'Auteur du blog',
@@ -56,13 +60,19 @@ $lang = array(
 	'blogs_list' => 'Liste des blogs',
 
 	// Manager du blog
-	'manager_head_message' => 'Vous êtes dans l\'administration de votre blog. Vous pouvez ici, gérer l\'ensemble des options. Créer, modifier, supprimer des articles. Gérer l\'apparence et le contenu de votre blog.',
-	'admin_blog' => 'Administration du blog',
-	'create_post' => 'Créer un billet',
-	'manage_posts' => 'Gérer les billets',
-	'delete_blog' => 'Supprimer mon blog',
+	'manager.manager_head_message' => 'Vous êtes dans l\'administration de votre blog. Vous pouvez ici, gérer l\'ensemble des options. Créer, modifier, supprimer des articles. Gérer l\'apparence et le contenu de votre blog.',
+	'manager.admin_blog' => 'Administration du blog',
+	'manager.admin_blog_link' => '#',
+	'manager.create_post' => 'Créer un billet',
+	'manager.create_post_link' => '#',
+	'manager.manage_posts' => 'Gérer les billets',
+	'manager.manage_posts_link' => '#',
+	'manager.delete_blog' => 'Supprimer mon blog',
+	'manager.delete_blog_link' => '#',
 
 	// Créer un blog
 	'creator.blog_name' => 'Nom du blog',
 	'creator.blog_name_desc' => 'Indiquez le nom de votre blog',
+	'creator.no_connected' => 'Il faut créer un compte sur le site pour créer un blog',
+	'creator.description' => 'Petit description de votre blog (moins de 1000 caractères)'
 );

@@ -65,7 +65,7 @@ class BlogUrlBuilder
 	// Manager
 	public static function create_blog(){
 
-		return DispatchManager::get_url(self::$dispatcher, '/create');
+		return DispatchManager::get_url(self::$dispatcher, '/creator');
 
 	}
 

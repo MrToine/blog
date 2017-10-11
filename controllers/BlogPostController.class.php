@@ -31,7 +31,8 @@ class BlogPostController extends ModuleController {
 			$blog_name,
 			$blog_post,
 			$post_name,
-			$lang;
+			$lang,
+			$user;
 	
 	public function execute(HTTPRequestCustom $request)
 	{
@@ -40,6 +41,8 @@ class BlogPostController extends ModuleController {
 		
 
 		$this->init();
+
+		$this->user = AppContext::get_current_user();
 
 		$result = BlogService::get_blog_articles($this->blog_post);
 		$post = new BlogUser();
@@ -50,6 +53,10 @@ class BlogPostController extends ModuleController {
 		$comments_topic = new BlogCommentsTopic();
 		$comments_topic->set_id_in_module($post->get_id());
 		$comments_topic->set_url(BlogUrlBuilder::display_comments_posts($post->get_slug()));
+
+		if($this->user->get_id() == $post->get_author_id()){
+			$this->view->put('IS_AUTHOR_BLOG', True);
+		}
 
 		$this->view->put_all(array(
 				'ID' => $post->get_id(),

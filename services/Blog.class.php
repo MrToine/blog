@@ -31,6 +31,9 @@ class Blog {
 			$_author_id,
 			$_name,
 			$_description,
+			$_start_date,
+			$_end_date,
+			$_end_date_enabled,
 			$_created,
 			$_approved;
 
@@ -52,10 +55,36 @@ class Blog {
 		
 	}
 
-	public function get_desccription(){
+	public function get_description(){
 
 		return $this->_description;
 		
+	}
+
+	public function set_start_date(Date $start_date){
+
+		$this->_start_date = $_start_date;
+	}
+	
+	public function get_start_date(){
+
+		return $this->_start_date;
+	}
+	
+	public function set_end_date(Date $end_date){
+
+		$this->_end_date = $_end_date;
+		$this->_end_date_enabled = true;
+	}
+	
+	public function get_end_date(){
+
+		return $this->_end_date;
+	}
+	
+	public function end_date_enabled(){
+
+		return $this->_end_date_enabled;
 	}
 
 	public function get_created(){
@@ -110,15 +139,9 @@ class Blog {
 
 	}
 
-	public function set_created($created){
+	public function set_created(Date $created){
 
-		$created = (int) $created;
-
-		if($created > 0){
-
-			$this->_created = date('d/m/Y', $created);
-
-		}
+		$this->_created = $created;
 
 	}
 
@@ -147,7 +170,7 @@ class Blog {
 			'author_id' => $this->get_author_id(),
 			'name' => TextHelper::htmlspecialchars($this->get_name()),
 			'description' => TextHelper::htmlspecialchars($this->get_description()),
-			'created' => TextHelper::htmlspecialchars($this->get_created()),
+			'created' => $this->get_created()->get_timestamp(),
 			'approved' => TextHelper::htmlspecialchars($this->get_approved())
 		);
 	}
@@ -158,20 +181,20 @@ class Blog {
 		$this->_author_id = $properties['author_id'];
 		$this->_name = $properties['name'];
 		$this->_description = $properties['description'];
-		$this->_created = $properties['created'];
+		$this->_created =new Date($properties['created'], Timezone::SERVER_TIMEZONE);
 		$this->_approved = $properties['approved'];
 	}
 
 	public function get_array_tpl_vars()
 	{
-
+		Date::get_array_tpl_vars($this->_created,'date');
 		return array(
 			'C_EDIT' => $this->is_authorized_edit(),
 			'ID' => $this->_id,
 			'author_id' => $this->_author_id,
 			'NAME' => $this->_name,
 			'DESCRIPTION' => $this->_description,
-			'CREATED' => date('d/m/Y', $this->_created),
+			'CREATED' => $this->get_start_date() != null ? $this->get_start_date()->get_timestamp() : $this->get_created()->get_timestamp(),
 			'APPROVED' => $this->_approved,
 		);
 	}

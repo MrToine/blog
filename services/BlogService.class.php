@@ -35,13 +35,18 @@ class BlogService
 		self::$db_querier = PersistenceContext::get_querier();
 	}
 	
-	public static function test($var, $bool = true){
+	public static function test($var, $bool = false){
 		echo '<pre>';
 		var_dump($var);
 		echo '</pre>';
 		if($bool){
 			die();
 		}
+	}
+
+	public static function create_blog(Blog $blog){
+		$result = self::$db_querier->insert(PREFIX.'blog', $blog->get_properties());
+		return $result->get_last_inserted_id();
 	}
 
 	public static function get_blog($blog_id)
@@ -61,6 +66,14 @@ class BlogService
 
 		return $result;
 
+	}
+
+	public static function user_blog_exist($user_id){
+		try {
+				$find = self::$db_querier->get_column_value(PREFIX.'blog', 'COUNT(*)', 'WHERE author_id = :author_id', array('author_id' => $user_id));
+			} catch (RowNotFoundException $e) {}
+
+		return $find;
 	}
 
 }

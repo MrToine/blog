@@ -1,4 +1,3 @@
-
 <?php
 /*##################################################
  *                           CreatorManageBlog.class.php
@@ -13,6 +12,7 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -32,31 +32,45 @@ class CreatorBlogController extends ModuleController {
 	private $view,
 			$blog_name,
 			$blog_id,
-			$lang;
+			$lang,
+			$user, 
+			$blog;
 	
 	public function execute(HTTPRequestCustom $request){
 
 		$this->init();
 
-		$user = AppContext::get_current_user();
-		if($user->check_level(User::MEMBER_LEVEL)){
+		$this->user = AppContext::get_current_user();
+		if($this->user->check_level(User::MEMBER_LEVEL)){
 			$this->view->put_all(array('USER_CONNECTED' => True));
 		}else{
 			$this->view->put_all(array('USER_CONNECTED' => False));
 		}
 
-		$form = $this->build_form();
+		if(BlogService::user_blog_exist($this->user->get_id()) <= 0){
+			$form = $this->build_form();
 
-		if ($this->submit_button->has_been_submited())
-		{
-			if ($form->validate())
+			if ($this->submit_button->has_been_submited())
 			{
-
-				die('ok');
+				if ($form->validate())
+				{
+					$this->blog = new Blog();
+					$this->blog->set_name($form->get_value('name'));
+					$this->blog->set_description($form->get_value('description'));
+					$this->blog->set_author_id($this->user->get_id());
+					$this->blog->set_created(new Date());
+					$this->blog->set_approved(0);
+					BlogService::test($this->blog);
+					BlogService::create_blog($this->blog);
+				}
 			}
+
+			$this->view->put('form', $form->display());
+		}else{
+			die('blog trouver :(');
 		}
 
-		$this->view->put('form', $form->display());
+			
 
 		return $this->generate_response();
 	}
@@ -80,6 +94,8 @@ class CreatorBlogController extends ModuleController {
 		$fieldset->add_field(new FormFieldTextEditor('name', $this->lang['creator.blog_name'], '', array(
 			'maxlength' => 25, 'description' => $this->lang['creator.blog_name_desc'], 'required' => true)
 		));
+		// DESCRIPTION
+		$fieldset->add_field(new FormFieldRichTextEditor('description', $this->lang['creator.description'], '', array('required' => true)));
 
 		// BUTTONS
 		$buttons_fieldset = new FormFieldsetSubmit('buttons');
@@ -95,6 +111,10 @@ class CreatorBlogController extends ModuleController {
 		$response = new SiteDisplayResponse($this->view);
 		$graphical_environment = $response->get_graphical_environment();
 		$graphical_environment->set_page_title($this->lang['module_title']);
+
+		$breadcrumb = $graphical_environment->get_breadcrumb();
+		$breadcrumb->add($this->lang['module_title'], BlogUrlBuilder::home()->rel());
+		$breadcrumb->add($this->lang['create_blog'], BlogUrlBuilder::create_blog());
 		
 		return $response;
 	}
