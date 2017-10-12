@@ -68,7 +68,10 @@ class BlogManagerController extends ModuleController {
 			$this->view->put('C_RESULT', False);
 		}*/
 
-		$this->view->put('CREATE_POST_LINK', BlogUrlBuilder::create_post($this->blog_id)->absolute());
+		$this->view->put_all(array(
+			'CREATE_POST_LINK' => BlogUrlBuilder::create_post($this->blog_id)->absolute(),
+			'MANAGER_POSTS_LINK' => BlogUrlBuilder::manage_posts($this->blog_id)->absolute(),
+		));
 
 		return $this->generate_response();
 	}

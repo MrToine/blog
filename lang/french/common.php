@@ -75,10 +75,18 @@ $lang = array(
 	'manager.form.slug_desc' => 'Contient uniquement des lettres minuscules, des chiffres et des traits d\'union',
 	'manager.form.content' => 'Contenu du billet',
 	'manager.form.publied' => 'Publié le billet directement ?',
+	'manager.posts.title' => 'Titre du billet',
+	'manager.posts.created' => 'Date de création',
+	'manager.posts.state' => 'Etat de votre billet',
+	'manager.posts.actions' => 'Actions possible',
 
 	// Créer un blog
 	'creator.blog_name' => 'Nom du blog',
 	'creator.blog_name_desc' => 'Indiquez le nom de votre blog',
 	'creator.no_connected' => 'Il faut créer un compte sur le site pour créer un blog',
-	'creator.description' => 'Petit description de votre blog (moins de 1000 caractères)'
+	'creator.description' => 'Petit description de votre blog (moins de 1000 caractères)',
+
+	//->POSTS
+	'state.post.publied' => '<span style="color:green">Publié</span>',
+	'state.post.nopublied' => '<span style="color:red">Non publié</span>',
 );

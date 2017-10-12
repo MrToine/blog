@@ -90,9 +90,36 @@ class BlogService
 	}
 
 	public static function create_post(BlogUser $post){
-		self::test($post);
 		$result = self::$db_querier->insert(PREFIX.'blog_articles', $post->get_properties());
 		return $result->get_last_inserted_id();
+	}
+
+	public static function update_post(BlogUser $post){
+		self::$db_querier->update(PREFIX.'blog_articles', $post->get_properties(), 'WHERE id=:id', array('id', $post->get_id()));
+	}
+
+	public static function get_post($post_id)
+	{
+
+		$row = self::$db_querier->select_single_row_query('SELECT * FROM '.PREFIX.'blog_articles WHERE id=:id', array('id' => $post_id));
+		
+		$post = new BlogUser();
+		$post->set_properties($row);
+
+		return $post;
+	}
+
+	public static function get_posts($blog_id){
+
+		/*$result = PersistenceContext::get_querier()->select_rows('SELECT * FROM '.PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id WHERE blog_id=:id',
+			array('id' => $blog_id)
+		);*/
+
+		$result = PersistenceContext::get_querier()->select_rows(PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id', array('*'), 'WHERE blog_id=:blog_id', array(
+    		'blog_id' => $blog_id
+		));
+		self::test($result, true);
+		return $result;
 	}
 
 }

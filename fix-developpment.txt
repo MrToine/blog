@@ -1,3 +1,7 @@
 ----11-10-2017----
 je me suis arrêté a la création d'un billet. Il faut repérer l'erreur (dans BlogService) -- Surement a voir avec BlogUser.class
 L'erreur actuelle viens de get_properties() qui ne peut pas etre null.
+
+----12-10-2017----
+->Créer billet = ok
+->mini menu admin (dans liste post et affichage d'un post) = ok

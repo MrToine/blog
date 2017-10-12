@@ -79,14 +79,18 @@ class BlogUrlBuilder
 
 	}
 
-	public static function manage_news($blog_id){
+	public static function manage_posts($blog_id){
 
-		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/');
+		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/posts');
 
 	}
 
 	public static function create_post($blog_id){
 		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/create');
+	}
+
+	public static function edit_post($blog_id, $post_id){
+		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/edit'.$post_id);
 	}
 }
 ?>
