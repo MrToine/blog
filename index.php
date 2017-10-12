@@ -40,13 +40,12 @@ $url_controller_mappers = array(
 	//Manager
 	new UrlControllerMapper('CreatorBlogController', '`^/creator`'),
 	new UrlControllerMapper('BlogCreatePostController', '`^(?:/([0-9]+))?/manager/create`', array('blog_id')),
-	new UrlControllerMapper('BlogManagerController', '`^/user(?:/([0-9]+))?/manager`', array('user_id')),
+	new UrlControllerMapper('BlogManagerController', '`^(?:/([0-9]+))?/manager`', array('blog_id')),
 	
 	//Display
-	new UrlControllerMapper('BlogPostController', '`^/post(?:/([0-9]+)-([a-z0-9-_]+))?/?$`', array('post_slug')),
 	new UrlControllerMapper('BlogPostController', '`^/post(?:/([a-z0-9-_]+))?/?`', array('post_slug')),
-	new UrlControllerMapper('BlogUserController', '`^/user(?:/([0-9]+))?/?$`', array('user_id')),
-	new UrlControllerMapper('BlogController', '`^.*$`')
+	new UrlControllerMapper('BlogUserController', '`^(?:/([0-9]+))?/?$`', array('user_id')),
+	new UrlControllerMapper('BlogController', '`^/list`')
 
 );
  

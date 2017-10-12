@@ -34,7 +34,7 @@ class BlogService
 	{
 		self::$db_querier = PersistenceContext::get_querier();
 	}
-	
+
 	public static function test($var, $bool = false){
 		echo '<pre>';
 		var_dump($var);
@@ -42,6 +42,19 @@ class BlogService
 		if($bool){
 			die();
 		}
+	}
+
+	public static function generate_slug($strlink) {
+		
+		$str = preg_replace('/\s/', '-', $strlink);
+        $str = htmlentities($str, ENT_NOQUOTES, 'utf-8');
+        $str = preg_replace('#&([A-za-z])(?:acute|cedil|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+        $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str);
+        $str = preg_replace('/(^\w\-]+)/i', '', $str);
+        $str = preg_replace('/([_])/i', '', $str);
+        $str = strtolower($str);
+
+        return $str;
 	}
 
 	public static function create_blog(Blog $blog){
@@ -78,7 +91,7 @@ class BlogService
 
 	public static function create_post(BlogUser $post){
 		self::test($post);
-		$result = self::$db_querier->insert(PREFIX.'blog_articles', $blog->get_properties());
+		$result = self::$db_querier->insert(PREFIX.'blog_articles', $post->get_properties());
 		return $result->get_last_inserted_id();
 	}
 

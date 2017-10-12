@@ -62,12 +62,15 @@ class BlogPostController extends ModuleController {
 				'ID' => $post->get_id(),
 				'NAME' => $post->get_name(),
 				'SLUG' => $post->get_slug(),
-				'CONTENT' => FormatingHelper::second_parse($post->get_content()),
+				'CONTENT' => $post->get_content(),
 				'CREATED' => date('d/m/Y', $post->get_created()),
 				'APPROVED' => $post->get_approved(),
 
 				'USER' => $result['display_name'],
 				'LINK_USER_PROFILE' => UserUrlBuilder::profile($result['user_id'])->absolute(),
+				'MANAGE_BLOG_LINK' => BlogUrlBuilder::manage_blog($post->get_blog_id())->absolute(),
+				'MANAGE_NEWS_LINK' => BlogUrlBuilder::manage_news($post->get_blog_id())->absolute(),
+				'CREATE_POST_LINK' => BlogUrlBuilder::create_post($post->get_blog_id())->absolute(),
 				'USER_ID' => $result['user_id'],
 				'USER_LEVEL_CLASS' => UserService::get_level_class($result['level']),
 				'COMMENTS' => $comments_topic->display()

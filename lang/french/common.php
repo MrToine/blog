@@ -43,7 +43,6 @@ $lang = array(
 	'head_user' => 'Auteur du blog',
 	'head_name' => 'Nom & descrption',
 	'head_created' => 'Créer le',
-	'link_blog_user' => BlogUrlBuilder::blog_user()->absolute(),
 
 	// Liste des articles
 	'by' => 'Par ',

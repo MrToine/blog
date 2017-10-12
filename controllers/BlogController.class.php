@@ -42,11 +42,9 @@ class BlogController extends ModuleController {
 			$blog = new Blog();
 			$blog->set_properties($row);
 
-			$link_to_blog = HOST.'/users/'.$blog->get_author_id();
-
 			$this->view->assign_block_vars('blog', $blog->get_array_tpl_vars(), array(
 				'CREATED' => $blog->get_created()->get_timestamp(),
-				'LINK_BLOG_USER'=> $link_to_blog,
+				'LINK_BLOG_USER'=> BlogUrlBuilder::blog_user($blog->get_author_id())->absolute(),
 				'USERNAME' => $row['display_name'],
 				'LINK_USER_PROFILE'=> UserUrlBuilder::profile($row['user_id'])->absolute(),
 				'USER_ID'=> $row['user_id'],
@@ -60,8 +58,7 @@ class BlogController extends ModuleController {
 		$this->view->put_all(array(
 				'HEAD_USER' => $this->lang['head_user'],
 				'HEAD_NAME' => $this->lang['head_name'],
-				'HEAD_CREATED' => $this->lang['head_created'],
-				'LINK_BLOG_USER' => $this->lang['link_blog_user'],
+				'HEAD_CREATED' => $this->lang['head_created']
 			));
 
 		return $this->generate_response();

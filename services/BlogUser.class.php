@@ -142,7 +142,7 @@ class BlogUser {
 
 	public function set_content($content){
 
-		$this->_content = htmlspecialchars($content);
+		$this->_content = $content;
 
 	}
 
@@ -175,10 +175,10 @@ class BlogUser {
 		return array(
 			'id' => $this->get_id(),
 			'blog_id' => $this->get_blog_id(),
-			'auhtor_id' => $this->get_author_id(),
+			'author_id' => $this->get_author_id(),
 			'name' => TextHelper::htmlspecialchars($this->get_name()),
 			'slug' => TextHelper::htmlspecialchars($this->get_slug()),
-			'content' => TextHelper::htmlspecialchars($this->get_content()),
+			'content' => $this->get_content(),
 			'created' => TextHelper::htmlspecialchars($this->get_created()),
 			'approved' => TextHelper::htmlspecialchars($this->get_approved())
 		);
@@ -197,14 +197,14 @@ class BlogUser {
 	}
 
 	public function get_array_tpl_vars()
-	{
+	{	
 		return array(
 			'ID' => $this->_id,
 			'BLOG_ID' => $this->_blog_id,
 			'AUTHOR_ID' => $this->_author_id,
 			'NAME' => $this->_name,
 			'SLUG' => $this->_slug,
-			'CONTENT' => $this->_content,
+			'CONTENT' => FormatingHelper::second_parse($this->_content),
 			'SHORT_CONTENT' => substr(@strip_tags($this->_content, '<br>'), 0, 500),
 			'CREATED' => date('d/m/Y', $this->_created),
 			'APPROVED' => $this->_approved,

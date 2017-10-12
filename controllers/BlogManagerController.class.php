@@ -31,17 +31,23 @@ class BlogManagerController extends ModuleController {
 
 	private $view,
 			$blog_name,
+			$blog_id,
 			$blog_author_id,
 			$lang,
 			$user;
 	
 	public function execute(HTTPRequestCustom $request){
 
-		$this->blog_author_id = $request->get_getint('user_id');
+		$this->blog_id = $request->get_getint('blog_id');
 
 		$this->init();
 
 		$this->user = AppContext::get_current_user();
+
+		$this->blog_author_id = BlogService::get_blog($this->blog_id)->get_author_id();
+
+		BlogService::test($this->blog_author_id);
+		BlogService::test($this->user->get_id());
 
 		if($this->user->get_id() == $this->blog_author_id){
 			$this->view->put('IS_AUTHOR_BLOG', True);
@@ -61,6 +67,8 @@ class BlogManagerController extends ModuleController {
 		}else{
 			$this->view->put('C_RESULT', False);
 		}*/
+
+		$this->view->put('CREATE_POST_LINK', BlogUrlBuilder::create_post($this->blog_id)->absolute());
 
 		return $this->generate_response();
 	}

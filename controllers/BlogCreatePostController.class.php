@@ -60,9 +60,10 @@ class BlogCreatePostController extends ModuleController {
 					'blog_id' => $this->blog_id,
 					'author_id' => $this->user->get_id(),
 					'name' => $form->get_value('title'),
-					'slug' => 'blabla',
+					'slug' => BlogService::generate_slug($form->get_value('title')),
 					'content' => $form->get_value('content'),
 					'created' => time(),
+					'updated' => time(),
 					'approved' => $approved
 				));
 			    BlogService::create_post($this->post);

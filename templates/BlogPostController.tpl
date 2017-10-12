@@ -3,9 +3,9 @@
 		<div class="content">
 			<div class="options info">
 				<h3>Gestion du blog</h3>
-				<p><a href="{@manager.create_post_link}">{@manager.create_post}</a></p>
-				<p><a href="{@manager.manage_posts_link}">{@manager.manage_posts}</a></p>
-				<p><a href="{@manager.admin_blog_link}">{@manager.admin_blog}</a></p>
+				<p><a href="{CREATE_POST_LINK}">{@manager.create_post}</a></p>
+				<p><a href="{MANAGE_NEWS_LINK}">{@manager.manage_posts}</a></p>
+				<p><a href="{MANAGE_BLOG_LINK}">{@manager.admin_blog}</a></p>
 			</div>
 		</div>			
 	# ENDIF #

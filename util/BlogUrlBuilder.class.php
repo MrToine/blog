@@ -37,7 +37,11 @@ class BlogUrlBuilder
 	 */
 	public static function home(){
 
-		return DispatchManager::get_url(self::$dispatcher, '/');
+		return DispatchManager::get_url(self::$dispatcher, '/list');
+	}
+
+	public static function list(){
+		return DispatchManager::get_url(self::$dispatcher, '/list');
 	}
 
 	public static function home_site(){
@@ -45,9 +49,9 @@ class BlogUrlBuilder
 		return DispatchManager::get_url(HOST);
 	}
 
-	public static function blog_user(){
+	public static function blog_user($user_id){
 
-		return DispatchManager::get_url(self::$dispatcher, '/user');
+		return DispatchManager::get_url(self::$dispatcher, '/'.$user_id);
 
 	}
 
@@ -69,10 +73,20 @@ class BlogUrlBuilder
 
 	}
 
-	public static function manage_blog($user_id){
+	public static function manage_blog($blog_id){
 
-		return DispatchManager::get_url(self::$dispatcher, 'user/'.$user_id.'/manager/');
+		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/');
 
+	}
+
+	public static function manage_news($blog_id){
+
+		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/');
+
+	}
+
+	public static function create_post($blog_id){
+		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/create');
 	}
 }
 ?>
