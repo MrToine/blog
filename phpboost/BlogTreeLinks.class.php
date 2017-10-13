@@ -32,6 +32,9 @@ class BlogTreeLinks implements ModuleTreeLinksExtensionPoint
 		$lang = LangLoader::get('common', 'blog');
 		$tree = new ModuleTreeLinks();
 
+		$tree->add_link(new AdminModuleLink($lang['config.module.configuration'], BlogUrlBuilder::config_module()));
+		$tree->add_link(new AdminModuleLink($lang['config.module.manager'], BlogUrlBuilder::config_manager_module()));
+
 		return $tree;
 	}
 }

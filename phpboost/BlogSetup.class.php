@@ -32,14 +32,15 @@
 class BlogSetup extends DefaultModuleSetup
 {
 
-	public static $blog_table = array('blog' => 'blog', 'articles' => 'blog_articles');
+	public static $blog_table = array();
 
 	private $blog;
 
 	public static function __static(){
 
-		self::$blog_table['blog'] = PREFIX . 'blog';
-		self::$blog_table['articles'] = PREFIX . 'blog_articles';
+		self::$blog_table['blog'] = PREFIX.'blog';
+		self::$blog_table['articles'] = PREFIX.'blog_articles';
+		self::$blog_table['config'] = PREFIX.'blog_config';
 
 	}
 
@@ -48,6 +49,7 @@ class BlogSetup extends DefaultModuleSetup
 		$this->drop_tables();
 		$this->create_table_blog();
 		$this->create_table_articles();
+		$this->create_table_config();
 		$this->insert_data();
  
 	}
@@ -62,6 +64,7 @@ class BlogSetup extends DefaultModuleSetup
 
 		PersistenceContext::get_dbms_utils()->drop(self::$blog_table['blog']);
 		PersistenceContext::get_dbms_utils()->drop(self::$blog_table['articles']);
+		PersistenceContext::get_dbms_utils()->drop(self::$blog_table['config']);
 
 	}
 
@@ -116,6 +119,56 @@ class BlogSetup extends DefaultModuleSetup
 
 	}
 
+	public function create_table_config(){
+		$fields_config = array(
+			'display_left_column' => array(
+				'type' => 'integer', 
+				'length' => 1, 
+				'notnull' => 1,
+				'default' => 0
+			),
+			'display_right_column' => array(
+				'type' => 'integer', 
+				'lenght' => 1, 
+				'notnull' => 1,
+				'default' => 0
+			),
+			'display_top_menu' => array(
+				'type' => 'integer', 
+				'lenght' => 1, 
+				'notnull' => 1,
+				'default' => 0
+			),
+			'nb_blog_per_user' => array(
+				'type' => 'integer',
+				'lenght' => 5,
+				'notnull' => 1,
+				'default' => 1
+			),
+			'display_blogs' => array(
+				'type' => 'string',
+				'lenght' => 11,
+				'notnull' => 11,
+				'default' => "'bloc'"
+			),
+			'style_for_blog' => array(
+				'type' => 'integer',
+				'lenght' => 1,
+				'notnull' => 1,
+				'default' => 1
+			),
+			'menu_for_blog' => array(
+				'type' => 'integer',
+				'lenght' => 1,
+				'notnull' => 1,
+				'default' => 0
+			),
+		);
+
+		PersistenceContext::get_dbms_utils()->create_table(self::$blog_table['config'], $fields_config);
+
+	}
+
 	private function insert_data(){
 
 		$this->blog = LangLoader::get('install', 'blog');
@@ -123,10 +176,22 @@ class BlogSetup extends DefaultModuleSetup
         PersistenceContext::get_querier()->insert(self::$blog_table['blog'], array(
 			'id' => 1,
 			'author_id' => 1,
-			'name' => $this->blog['blog.blog_name'],
-			'description' => $this->blog['blog.blog_description'],
+			'name' => $this->blog['blog.name'],
+			'description' => $this->blog['blog.description'],
 			'created' => time(),
 			'approved' => 1,
+		));
+
+		PersistenceContext::get_querier()->insert(self::$blog_table['articles'], array(
+			'id' => 1,
+			'blog_id' => 1,
+			'author_id' => 1,
+			'name' => $this->blog['post.title'],
+			'slug' => $this->blog['post.slug'],
+			'content' => $this->blog['post.content'],
+			'created' => time(),
+			'updated' => time(),
+			'approved' => 1
 		));
 	}
 

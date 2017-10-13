@@ -31,6 +31,10 @@
  ####################################################
 
 $lang = array(
-	'blog.blog_name' => 'Mon 1er Blog',
-	'blog.blog_description' => 'Mon premier blog ! Un article à été créer pour vous lister les possibilités.',
+	'blog.name' => 'Mon 1er Blog',
+	'blog.description' => 'Mon premier blog ! Un article à été créer pour vous lister les possibilités.',
+
+	'post.title' => 'Mon premier Billet',
+	'post.slug' => 'mon-premier-billet',
+	'post.content' => 'Bienvenu dans le module Blog pour phpboost. Vous pouvez dès à present configurer ce module dans le panneau admin.'
 );

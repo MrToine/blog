@@ -96,5 +96,14 @@ class BlogUrlBuilder
 	public static function delete_post($blog_id, $post_id){
 		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/delete/'.$post_id);
 	}
+
+	//-> Admin/Config
+	public static function config_module(){
+		return DispatchManager::get_url(self::$dispatcher, '/admin/config');
+	}
+
+	public static function config_manager_module(){
+		return DispatchManager::get_url(self::$dispatcher, '/admin/manager');
+	}
 }
 ?>

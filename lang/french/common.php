@@ -39,6 +39,23 @@ $lang = array(
 	//->Liens administation
 	'admin.config' => 'Configuration des blogs',
 
+	//->Configuration module
+	'config.module.configuration' => 'Configuration du module',
+	'config.module.manager' => 'Gérer les blogs',
+	'config.form.intro' => 'Sur cette page vous avez la possibilité de configuré entièrement le module. La configuration est divisé en plusieurs partie.',
+	'config.form.left_column' => 'Masquer la colonne de gauche',
+	'config.form.right_column' => 'Masquer la colonne de droite',
+	'config.form.top_menu' => 'Masquer le menu en haut de page',
+	'config.form.nb_blogs_per_user' => 'Nombre de blog autorisé par membre',
+	'config.form.bloc_or_list' => 'Afficher les blogs en bloc ou en liste ?',
+	'config.form.bloc' => 'En bloc',
+	'config.form.list' => 'En liste',
+	'config.form.blog_style' => 'Permettre aux blogs d\'avoir un style différent au site',
+	'config.form.blog_menu' => 'Permettre aux blogs d\'avoir un menu propre à lui',
+
+	'donation' => 'Plus de 20 heures de développement ont été nécessaire pour le développement de ce module. Si vous voulez soutenir le projet, et soutenir son créateur vous pouvez faire un don paypal via le bouton ci-dessous. Ce n\'est bien sûre pas obligatoire et même sans ce petit geste, je garanti des modules de qualité et un suivis personnel pour chaque utilisateurs du module. Mais un simple don permet d\'encourager et de remercier un créateur pour son travail. Anthony VIOLET',
+	'mail.creator.module' => 'anthony.violet@outlook.be',
+
 	// Liste des blogs
 	'head_user' => 'Auteur du blog',
 	'head_name' => 'Nom & descrption',

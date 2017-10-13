@@ -35,7 +35,7 @@ ThemesManager::get_theme(AppContext::get_current_user()->get_theme())->get_colum
  
 $url_controller_mappers = array(
 	//Admin
-	new UrlControllerMapper('AdminBlogManageController', '`^/admin/manage`'),
+	new UrlControllerMapper('AdminConfigBlogController', '`^/admin/config`'),
 
 	//Manager
 	new UrlControllerMapper('CreatorBlogController', '`^/creator`'),
