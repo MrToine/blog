@@ -52,6 +52,10 @@ class BlogService
 		return $config;
 	} 
 
+	public static function update_config($args){
+		self::$db_querier->update(PREFIX.'blog_config', $args, '');
+	}
+
 	public static function generate_slug($strlink) {
 		
 		$str = preg_replace('/\s/', '-', $strlink);

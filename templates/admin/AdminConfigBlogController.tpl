@@ -1,3 +1,6 @@
+# IF FORM_OK #
+	<div class="success">{@config.form.success}</div>
+# ENDIF #
 <h1>{@config.module.configuration}</h1>
 <p>{@config.form.intro}</p>
 

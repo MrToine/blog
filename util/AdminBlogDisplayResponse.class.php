@@ -34,7 +34,7 @@ class AdminBlogDisplayResponse extends AdminMenuDisplayResponse
 		$lang = LangLoader::get('common', 'blog');
 		$this->set_title($lang['module_title']);
 
-		$this->add_link($lang['config.module.configuration'], PartnersUrlBuilder::config_partners());
+		$this->add_link($lang['config.module.configuration'], BlogUrlBuilder::config_module());
 		$this->add_link($lang['config.module.manager'], BlogUrlBuilder::config_manager_module());
 		
 		$env = $this->get_graphical_environment();

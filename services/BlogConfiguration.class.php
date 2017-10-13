@@ -30,7 +30,7 @@ class BlogConfiguration {
 	private $_display_left_column,
 			$_display_right_column,
 			$_display_top_menu,
-			$_nb_blog_per_user,
+			$_nb_blogs_per_user,
 			$_display_blogss,
 			$_style_for_blog,
 			$_menu_for_blog;
@@ -47,11 +47,11 @@ class BlogConfiguration {
 		return $this->_display_top_menu;
 	}
 
-	public function get_nb_blog_per_user(){
-		return $this->_nb_blog_per_user;
+	public function get_nb_blogs_per_user(){
+		return $this->_nb_blogs_per_user;
 	}
 
-	public function get_display_blogss(){
+	public function get_display_blogs(){
 		return $this->_display_blogss;
 	}
 
@@ -81,10 +81,10 @@ class BlogConfiguration {
 		$this->_display_top_menu = $display_top_menu;
 	}
 
-	public function set_nb_blog_per_user($nb_blog_per_user){
-		$nb_blog_per_user = (int) $nb_blog_per_user;
+	public function set_nb_blogs_per_user($nb_blogs_per_user){
+		$nb_blogs_per_user = (int) $nb_blogs_per_user;
 
-		$this->_nb_blog_per_user = $nb_blog_per_user;
+		$this->_nb_blogs_per_user = $nb_blogs_per_user;
 	}
 
 	public function set_display_blogs($display_blogs){
@@ -108,7 +108,7 @@ class BlogConfiguration {
 			'display_left_column' => $this->get_display_left_column(),
 			'display_right_column' => $this->get_display_right_column(),
 			'display_top_menu' => $this->get_display_top_menu(),
-			'nb_blog_per_user' => $this->get_nb_blog_per_user(),
+			'nb_blogs_per_user' => $this->get_nb_blogs_per_user(),
 			'display_blogs' => $this->get_display_blogs(),
 			'style_for_blog' => $this->get_style_for_blog(),
 			'menu_for_blog' => $this->get_menu_for_blog()
@@ -119,7 +119,7 @@ class BlogConfiguration {
 		$this->_display_left_column = $properties['display_left_column'];
 		$this->_display_right_column = $properties['display_right_column'];
 		$this->_display_top_menu = $properties['display_top_menu'];
-		$this->_nb_blog_per_user = $properties['nb_blog_per_user'];
+		$this->_nb_blogs_per_user = $properties['nb_blogs_per_user'];
 		$this->_display_blogs = $properties['display_blogs'];
 		$this->_style_for_blog = $properties['style_for_blog'];
 		$this->_menu_for_blog = $properties['menu_for_blog'];
@@ -130,7 +130,7 @@ class BlogConfiguration {
 			'DISPLAY_LEFT_COLUMN' => $this->_display_left_column, 
 			'DISPLAY_RIGHT_COLUMN' => $this->_display_right_column,
 			'DISPLAY_TOP_MENU' => $this->_display_top_menu,
-			'NB_BLOG_PER_USER' => $this->_nb_blog_per_user,
+			'nb_blogs_PER_USER' => $this->_nb_blogs_per_user,
 			'DISPLAY_BLOGS' => $this->_display_blogs,
 			'STYLE_FOR_BLOG' => $this->_style_for_blog,
 			'MENU_FOR_BLOG' => $this->_menu_for_blog,
