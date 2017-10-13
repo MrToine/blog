@@ -44,6 +44,14 @@ class BlogService
 		}
 	}
 
+	public static function get_config(){
+		$row = self::$db_querier->select_single_row_query('SELECT * FROM '.PREFIX.'blog_config');
+
+		$config = new BlogConfiguration();
+		$config->set_properties($row);
+		return $config;
+	} 
+
 	public static function generate_slug($strlink) {
 		
 		$str = preg_replace('/\s/', '-', $strlink);

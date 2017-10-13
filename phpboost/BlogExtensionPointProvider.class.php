@@ -46,7 +46,7 @@ class BlogExtensionPointProvider extends ExtensionPointProvider
 	
 	public function url_mappings()
 	{
-		return new UrlMappings(array(new DispatcherUrlMapping('/blog/index.php')));
+		return new UrlMappings(array(new DispatcherUrlMapping('/blog/list')));
 	}
 
 	public function css_files()
