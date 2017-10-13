@@ -98,6 +98,11 @@ class BlogService
 		self::$db_querier->update(PREFIX.'blog_articles', $post->get_properties(), 'WHERE id=:id', array('id', $post->get_id()));
 	}
 
+	public static function delete_post($condition, array $parameters){
+		self::$db_querier->delete(PREFIX.'blog_articles', $condition, $parameters);
+	}
+
+
 	public static function get_post($post_id)
 	{
 

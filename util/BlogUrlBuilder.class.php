@@ -90,7 +90,11 @@ class BlogUrlBuilder
 	}
 
 	public static function edit_post($blog_id, $post_id){
-		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/edit'.$post_id);
+		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/edit/'.$post_id);
+	}
+
+	public static function delete_post($blog_id, $post_id){
+		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/delete/'.$post_id);
 	}
 }
 ?>

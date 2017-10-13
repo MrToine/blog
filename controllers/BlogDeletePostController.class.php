@@ -1,6 +1,6 @@
 <?php
 /*##################################################
- *                           CreatorManageBlog.class.php
+ *                           BlogCreatePostController.class.php
  *                            -------------------
  *   begin                : November 17, 2014
  *   copyright            : (C) 2014 Anthony VIOLET
@@ -25,77 +25,56 @@
  *
  ###################################################*/
 
-class BlogPostsManagerController extends ModuleController {
+class BlogDeletePostController extends ModuleController {
 
-	
-
-	private $view,
-			$blog_name,
-			$blog_id,
+	private $lang,
+			$view,
 			$blog_author_id,
-			$lang,
-			$user;
-	
+			$user,
+			$blog_id,
+			$post_id;
+
 	public function execute(HTTPRequestCustom $request){
 
-		$this->blog_id = $request->get_getint('blog_id');
+		/*
+			EN COURS D'AMENAGEMENT.
 
+			Système à repenser. Pour le moment, le membre supprime son billet sans message d'avertissement.
+			A changer...
+		*/
+
+		$this->blog_id = $request->get_getint('blog_id');
+		$this->post_id = $request->get_getint('post_id');
 		$this->init();
 
 		$this->user = AppContext::get_current_user();
 
 		$this->blog_author_id = BlogService::get_blog($this->blog_id)->get_author_id();
 
-		if($this->user->get_id() == $this->blog_author_id){
+		if($this->blog_author_id == $this->user->get_id()){
 			$this->view->put('IS_AUTHOR_BLOG', True);
 		}
 
-		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id WHERE blog_id=:id',
-			array('id' => $this->blog_id)
-		);
-
-		while ($row = $result->fetch())
-		{
-
-			$post = new BlogUser();
-			$post->set_properties($row);
-			
-			if($post->get_approved() == 1){
-				$state = $this->lang['state.post.publied'];
-				$icon_fa = 'fa-check';
-			}else{
-				$state = $this->lang['state.post.nopublied'];
-				$icon_fa = 'fa-ban';
-			}
-
-			$this->view->assign_block_vars('post', $post->get_array_tpl_vars(), array(
-				'STATE' => $state,
-				'ICON' => $icon_fa,
-				'EDIT_POST_LINK' => BlogUrlBuilder::edit_post($this->blog_id, $post->get_id())->absolute(),
-				'DELETE_POST_LINK' => BlogUrlBuilder::delete_post($this->blog_id, $post->get_id())->absolute()
-			));
-
-		}
-
-		$this->view->put('CREATE_POST_LINK', BlogUrlBuilder::create_post($this->blog_id)->absolute());
+		BlogService::delete_post('WHERE id=:id', array('id' => $this->post_id));
+		AppContext::get_response()->redirect(BlogUrlBuilder::manage_posts($this->blog_id)->absolute());
 
 		return $this->generate_response();
 	}
-	
-	private function init()
-	{
+
+	private function init(){
 		$this->lang = LangLoader::get('common', 'blog');
-		$this->view = new FileTemplate('blog/BlogPostsManagerController.tpl');
+		$this->view = new FileTemplate('blog/BlogDeletePostController.tpl');
 		$this->view->add_lang($this->lang);
 	}
-	
-	private function generate_response()
-	{
+
+	private function generate_response(){
+		$modulesLoader = AppContext::get_extension_provider_service();
+		$module = $modulesLoader->get_provider('blog');
+
 		$response = new SiteDisplayResponse($this->view);
 		$graphical_environment = $response->get_graphical_environment();
 		$graphical_environment->set_page_title($this->lang['module_title']);
-		
+
 		return $response;
 	}
-
 }

@@ -13,7 +13,7 @@
 			<td><a href="{@link_blog_post}/{post.SLUG}">{post.NAME}</a></td>
 			<td>{post.CREATED}</td>
 			<td>{post.STATE} <i class="fa {post.ICON}"></i></td>
-			<td><a href="{EDIT_POST_LINK}" title="éditer"><i class="fa fa-edit"></i></a> | <a href=""><i class="fa fa-delete"></i></a></td>
+			<td><a href="{post.EDIT_POST_LINK}" title="éditer"><i class="fa fa-edit"></i></a> | <a href="{post.DELETE_POST_LINK}"><i class="fa fa-delete"></i></a></td>
 		</tr>
 		# END post #
 	</table>

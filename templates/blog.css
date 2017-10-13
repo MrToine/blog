@@ -23,3 +23,11 @@ ul.blog_user_menu > li {
 	background: rgba(0,0,0, 0.3);
 
 }
+
+.error-button {
+	color: #FFFFFF;
+}
+
+.success-button {
+	background-color: green;
+}
