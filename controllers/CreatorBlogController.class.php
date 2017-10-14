@@ -41,13 +41,14 @@ class CreatorBlogController extends ModuleController {
 		$this->init();
 
 		$this->user = AppContext::get_current_user();
+		$config = BlogService::get_config();
 		if($this->user->check_level(User::MEMBER_LEVEL)){
 			$this->view->put_all(array('USER_CONNECTED' => True));
 		}else{
 			$this->view->put_all(array('USER_CONNECTED' => False));
 		}
 
-		if(BlogService::user_blog_exist($this->user->get_id()) <= 0){
+		if(BlogService::user_blog_exist($this->user->get_id()) < $config->get_nb_blogs_per_user() ){
 			$form = $this->build_form();
 
 			if ($this->submit_button->has_been_submited())

@@ -146,10 +146,10 @@ class BlogSetup extends DefaultModuleSetup
 				'default' => 1
 			),
 			'display_blogs' => array(
-				'type' => 'string',
+				'type' => 'integer',
 				'lenght' => 11,
 				'notnull' => 11,
-				'default' => "'bloc'"
+				'default' => 0
 			),
 			'style_for_blog' => array(
 				'type' => 'integer',

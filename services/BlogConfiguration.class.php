@@ -31,7 +31,7 @@ class BlogConfiguration {
 			$_display_right_column,
 			$_display_top_menu,
 			$_nb_blogs_per_user,
-			$_display_blogss,
+			$_display_blogs,
 			$_style_for_blog,
 			$_menu_for_blog;
 
@@ -52,7 +52,7 @@ class BlogConfiguration {
 	}
 
 	public function get_display_blogs(){
-		return $this->_display_blogss;
+		return $this->_display_blogs;
 	}
 
 	public function get_style_for_blog(){

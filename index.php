@@ -30,8 +30,16 @@ define('PATH_TO_ROOT', '..');
 require_once PATH_TO_ROOT . '/kernel/init.php';
 
 //Supprime les menus.
+$config = BlogService::get_config();
+if(!$config->get_display_left_column()){
 ThemesManager::get_theme(AppContext::get_current_user()->get_theme())->get_columns_disabled()->set_disable_left_columns(true);
+}
+if(!$config->get_display_right_column()){
 ThemesManager::get_theme(AppContext::get_current_user()->get_theme())->get_columns_disabled()->set_disable_right_columns(true);
+}
+if(!$config->get_display_top_menu()){
+	ThemesManager::get_theme(AppContext::get_current_user()->get_theme())->get_columns_disabled()->set_disable_top_central(true);
+}
  
 $url_controller_mappers = array(
 	//Admin

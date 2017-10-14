@@ -47,7 +47,7 @@ $lang = array(
 	'config.form.right_column' => 'Afficher la colonne de droite',
 	'config.form.top_menu' => 'Afficher le menu en haut de page',
 	'config.form.nb_blogs_per_user' => 'Nombre de blog autorisé par membre',
-	'config.form.bloc_or_list' => 'Afficher les blogs en bloc ou en liste ?',
+	'config.form.bloc_or_list' => 'Afficher les blogs en bloc ? Activé = oui',
 	'config.form.bloc' => 'En bloc',
 	'config.form.list' => 'En liste',
 	'config.form.blog_style' => 'Permettre aux blogs d\'avoir un style différent au site',

@@ -33,6 +33,8 @@ class BlogController extends ModuleController {
 	public function execute(HTTPRequestCustom $request)
 	{
 		$this->init();
+
+		$config = BlogService::get_config();
 		
 		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog.author_id');
 
@@ -44,7 +46,7 @@ class BlogController extends ModuleController {
 
 			$this->view->assign_block_vars('blog', $blog->get_array_tpl_vars(), array(
 				'CREATED' => $blog->get_created()->get_timestamp(),
-				'LINK_BLOG_USER'=> BlogUrlBuilder::blog_user($blog->get_author_id())->absolute(),
+				'LINK_BLOG_USER'=> BlogUrlBuilder::blog_user($blog->get_id())->absolute(),
 				'USERNAME' => $row['display_name'],
 				'LINK_USER_PROFILE'=> UserUrlBuilder::profile($row['user_id'])->absolute(),
 				'USER_ID'=> $row['user_id'],
@@ -55,10 +57,17 @@ class BlogController extends ModuleController {
 		
 		$result->dispose();
 
+		if($config->get_display_blogs() == 1){
+			$display_bloc = True;
+		}else{
+			$display_bloc = False;
+		}
+
 		$this->view->put_all(array(
 				'HEAD_USER' => $this->lang['head_user'],
 				'HEAD_NAME' => $this->lang['head_name'],
-				'HEAD_CREATED' => $this->lang['head_created']
+				'HEAD_CREATED' => $this->lang['head_created'],
+				'DISPLAY_BLOC' => $display_bloc
 			));
 
 		return $this->generate_response();

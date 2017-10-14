@@ -1,4 +1,17 @@
-<div class="content">
+# IF DISPLAY_BLOC #
+	# START blog #
+		<article class="article-news article-several block new-content" style="float:left;width:45%;height:150px;">
+			<header>
+				<h2><a href="{blog.LINK_BLOG_USER}">{blog.NAME}</a></h2>
+				<div class="more">
+					<a href="{blog.LINK_USER_PROFILE}" class="{blog.USER_LEVEL_CLASS}" # IF C_USER_GROUP_COLOR # style="color:{USER_GROUP_COLOR}" # ENDIF #>{blog.USERNAME}</a>
+				</div>
+			</header>
+			<div class="content">{blog.DESCRIPTION}</div>
+			<footer>{CREATED}</footer>
+		</article>
+	# END blog #
+# ELSE #
 	<table>
 		<thead>
 			<th width="20%">{HEAD_USER}</th>
@@ -19,4 +32,4 @@
 			# END blog #			
 		</tbody>
 	</table>
-</div>
+# ENDIF #
