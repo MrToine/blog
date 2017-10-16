@@ -1,15 +1,25 @@
 <section>
 	<content>
-		# IF IS_AUTHOR_BLOG #
-			<div class="content">
-				<div class="options info">
-					<h3>Gestion du blog</h3>
-					<p><a href="{CREATE_POST_LINK}">{@manager.create_post}</a></p>
-					<p><a href="{MANAGE_NEWS_LINK}">{@manager.manage_posts}</a></p>
-					<p><a href="{MANAGE_BLOG_LINK}">{@manager.admin_blog}</a></p>
-				</div>
-			</div>			
-		# ENDIF #
+		<div class="content">
+			<div class="options info">
+				# IF IS_AUTHOR_BLOG #
+						<h3>Gestion du blog</h3>
+						<p><a href="{CREATE_POST_LINK}">{@manager.create_post}</a></p>
+						<p><a href="{MANAGE_NEWS_LINK}">{@manager.manage_posts}</a></p>
+						<p><a href="{MANAGE_BLOG_LINK}">{@manager.admin_blog}</a></p>
+				# ENDIF #
+				# IF MENU_FOR_BLOG #
+					<div class="module-mini-container">
+						<div class="module-top">
+							<h5>{@mini.module.aboutme}</h5>
+						</div>
+						<div classe="module-contents">	
+							<p>{ABOUT_ME}</p>
+						</div>
+					</div>						
+				# ENDIF #
+			</div>
+		</div>	
 		<header>
 			<div class="blog_name">{BLOG_NAME}</div>
 		</header>

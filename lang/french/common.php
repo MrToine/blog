@@ -75,6 +75,7 @@ $lang = array(
 	'create_a_blog' => 'Créer un blog',
 	'blogs_list_link' => BlogUrlBuilder::home()->absolute(),
 	'blogs_list' => 'Liste des blogs',
+	'mini.module.aboutme' => 'A propos de l\'auteur',
 
 	// Manager du blog
 	'manager.manager_head_message' => 'Vous êtes dans l\'administration de votre blog. Vous pouvez ici, gérer l\'ensemble des options. Créer, modifier, supprimer des articles. Gérer l\'apparence et le contenu de votre blog.',

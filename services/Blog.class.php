@@ -30,6 +30,7 @@ class Blog {
 	private $_id,
 			$_author_id,
 			$_name,
+			$_about,
 			$_description,
 			$_start_date,
 			$_end_date,
@@ -52,6 +53,12 @@ class Blog {
 	public function get_name(){
 
 		return $this->_name;
+		
+	}
+
+	public function get_about(){
+
+		return $this->_about;
 		
 	}
 
@@ -133,6 +140,16 @@ class Blog {
 
 	}
 
+	public function set_about($about){
+
+		if(is_string($about)){
+
+			$this->_about = htmlspecialchars($about);
+
+		}
+
+	}
+
 	public function set_description($description){
 
 		$this->_description = htmlspecialchars($description);
@@ -169,6 +186,7 @@ class Blog {
 			'id' => $this->get_id(),
 			'author_id' => $this->get_author_id(),
 			'name' => TextHelper::htmlspecialchars($this->get_name()),
+			'about' => TextHelper::htmlspecialchars($this->get_about()),
 			'description' => TextHelper::htmlspecialchars($this->get_description()),
 			'created' => $this->get_created()->get_timestamp(),
 			'approved' => TextHelper::htmlspecialchars($this->get_approved())
@@ -180,6 +198,7 @@ class Blog {
 		$this->_id = $properties['id'];
 		$this->_author_id = $properties['author_id'];
 		$this->_name = $properties['name'];
+		$this->_about = $properties['about'];
 		$this->_description = $properties['description'];
 		$this->_created =new Date($properties['created'], Timezone::SERVER_TIMEZONE);
 		$this->_approved = $properties['approved'];
@@ -193,6 +212,7 @@ class Blog {
 			'ID' => $this->_id,
 			'author_id' => $this->_author_id,
 			'NAME' => $this->_name,
+			'ABOUT_ME' => $this->_about,
 			'DESCRIPTION' => $this->_description,
 			'CREATED' => $this->get_start_date() != null ? $this->get_start_date()->get_timestamp() : $this->get_created()->get_timestamp(),
 			'APPROVED' => $this->_approved,

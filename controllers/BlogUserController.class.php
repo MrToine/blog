@@ -43,6 +43,8 @@ class BlogUserController extends ModuleController {
 
 		$this->user = AppContext::get_current_user();
 
+		$config = BlogService::get_config();
+
 		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog_articles JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog_articles.author_id WHERE blog_id=:id',
 			array('id' => $this->blog_id)
 		);
@@ -71,6 +73,16 @@ class BlogUserController extends ModuleController {
 
 			));
 
+		}
+
+		if($config->get_menu_for_blog() == 1){
+			
+			$blog_menu = BlogService::get_blog($this->blog_id);
+
+			$this->view->put_all(array(
+				'MENU_FOR_BLOG' => True,
+				'ABOUT_ME' => $blog_menu->get_about()
+			));
 		}
 		
 		$result->dispose();
