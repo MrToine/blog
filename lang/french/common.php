@@ -54,7 +54,7 @@ $lang = array(
 	'config.form.blog_menu' => 'Permettre aux blogs d\'avoir un menu propre à lui',
 	'config.form.success' => 'Les informations ont bien été enregistrés, et ont été mis à jours',
 
-	'donation' => 'Plus de 20 heures ont été nécessaire pour le développement de ce module. Si vous voulez soutenir le projet, et soutenir son créateur vous pouvez faire un don paypal via le bouton ci-dessous. Ce n\'est bien sûre pas obligatoire et même sans ce petit geste, je garanti des modules de qualité et un suivis personnel pour chaque utilisateurs du module. Mais un simple don permet d\'encourager et de remercier un créateur pour son travail. Anthony VIOLET',
+	'donation' => '',//'Plus de 20 heures ont été nécessaire pour le développement de ce module. Si vous voulez soutenir le projet, et soutenir son créateur vous pouvez faire un don paypal via le bouton ci-dessous. Ce n\'est bien sûre pas obligatoire et même sans ce petit geste, je garanti des modules de qualité et un suivis personnel pour chaque utilisateurs du module. Mais un simple don permet d\'encourager et de remercier un créateur pour son travail. Anthony VIOLET',
 	'mail.creator.module' => 'anthony.violet@outlook.be',
 
 	// Liste des blogs
