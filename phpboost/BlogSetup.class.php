@@ -139,7 +139,7 @@ class BlogSetup extends DefaultModuleSetup
 				'notnull' => 1,
 				'default' => 0
 			),
-			'nb_blog_per_user' => array(
+			'nb_blogs_per_user' => array(
 				'type' => 'integer',
 				'lenght' => 5,
 				'notnull' => 1,
@@ -198,7 +198,7 @@ class BlogSetup extends DefaultModuleSetup
 			'display_left_column' => 0,
 			'display_right_column' => 0,
 			'display_top_menu' => 0,
-			'nb_blog_per_user' => 1,
+			'nb_blogs_per_user' => 1,
 			'display_blogs' => 0,
 			'style_for_blog' => 1,
 			'menu_for_blog' => 1,
