@@ -1,6 +1,6 @@
 # IF DISPLAY_BLOC #
 	# START blog #
-		<article class="article-news article-several block new-content" style="float:left;width:45%;height:150px;">
+		<article class="block" style="height:150px;/*float:left,*/width:98%;margin-bottom:20px;">
 			<header>
 				<h2><a href="{blog.LINK_BLOG_USER}">{blog.NAME}</a></h2>
 				<div class="more">
