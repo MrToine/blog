@@ -49,10 +49,11 @@ class AdminConfigBlogController extends AdminModuleController {
 					'display_left_column' => $form_config->get_value('left_columns'), 
 					'display_right_column' => $form_config->get_value('right_columns'), 
 					'display_top_menu' => $form_config->get_value('top_menu'),
-					'nb_blogs_per_user' => $form_config->get_value('number_blogs_per_user'),
+					//'nb_blogs_per_user' => $form_config->get_value('number_blogs_per_user'),
 					'display_blogs' => $form_config->get_value('bloc_or_list'), 
+					/* PROCHAINE MAJ
 					'style_for_blog' => $form_config->get_value('blog_style'), 
-					'menu_for_blog' => $form_config->get_value('blog_menu')
+					'menu_for_blog' => $form_config->get_value('blog_menu')*/
 				));
 				$this->view->put_all(array(
 					'FORM_OK' => true,
@@ -77,13 +78,15 @@ class AdminConfigBlogController extends AdminModuleController {
 		$fieldset->add_field(new FormFieldCheckbox('left_columns', $this->lang['config.form.left_column'], $this->config->get_display_left_column()));
 		$fieldset->add_field(new FormFieldCheckbox('right_columns', $this->lang['config.form.right_column'],$this->config->get_display_right_column()));
 		$fieldset->add_field(new FormFieldCheckbox('top_menu', $this->lang['config.form.top_menu'], $this->config->get_display_top_menu()));
-		$fieldset->add_field(new FormFieldNumberEditor('number_blogs_per_user', $this->lang['config.form.nb_blogs_per_user'].'<span style="color:red">(En plein aménagement, ne fonctionne pas.)</span>', $this->config->get_nb_blogs_per_user(), array(
+		/*$fieldset->add_field(new FormFieldNumberEditor('number_blogs_per_user', $this->lang['config.form.nb_blogs_per_user'].'<span style="color:red">(En plein aménagement, ne fonctionne pas.)</span>', $this->config->get_nb_blogs_per_user(), array(
 			'min' => 1, 'max' => 5, 'description' => ''),
 			array(new FormFieldConstraintIntegerRange(1, 5))
-		));
+		));*/
 		$fieldset->add_field(new FormFieldCheckbox('bloc_or_list', $this->lang['config.form.bloc_or_list'], $this->config->get_display_blogs()));
+		/* >>> PROCHAINE MAJ
+
 		$fieldset->add_field(new FormFieldCheckbox('blog_style', $this->lang['config.form.blog_style'],$this->config->get_style_for_blog()));
-		$fieldset->add_field(new FormFieldCheckbox('blog_menu', $this->lang['config.form.blog_menu'], $this->config->get_menu_for_blog()));
+		$fieldset->add_field(new FormFieldCheckbox('blog_menu', $this->lang['config.form.blog_menu'], $this->config->get_menu_for_blog()));*/
 
 		// BUTTONS
 		$buttons_fieldset = new FormFieldsetSubmit('buttons');

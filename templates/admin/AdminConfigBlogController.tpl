@@ -6,10 +6,6 @@
 
 # INCLUDE form_config #
 
-# INCLUDE form_style #
-
-<h2>Autorisations</h2>
-
 <h2>Informations</h2>
 <div class="success">
 	{@donation}<br />

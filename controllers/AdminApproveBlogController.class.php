@@ -1,10 +1,11 @@
+
 <?php
 /*##################################################
- *                             forum_begin.php
+ *                           AdminManagerBlogController.class.php
  *                            -------------------
- *   begin                : October 18, 2007
- *   copyright            : (C) 2007 Viarre régis
- *   email                : crowkait@phpboost.com
+ *   begin                : October 20, 2017
+ *   copyright            : (C) 2014 Anthony VIOLET
+ *   email                : anthony.violet@outlook.fr
  *
  *
  ###################################################
@@ -13,7 +14,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -25,22 +26,31 @@
  *
  ###################################################*/
 
-if (defined('PHPBOOST') !== true)
-    exit;
+class AdminApproveBlogController extends AdminModuleController {
 
-load_module_lang('forum'); //Chargement de la langue du module.
+	private $view,
+			$lang;
 
-$config = ForumConfig::load();
-require_once(PATH_TO_ROOT . '/forum/forum_defines.php');
+	public function execute(HTTPRequestCustom $request){
 
-//Supprime les menus suivant configuration du site.
-$columns_disabled = ThemesManager::get_theme(AppContext::get_current_user()->get_theme())->get_columns_disabled();
-if ($config->is_left_column_disabled()) 
-	$columns_disabled->set_disable_left_columns(true);
-if ($config->is_right_column_disabled()) 
-	$columns_disabled->set_disable_right_columns(true);
-    
-//Fonction du forum.
-require_once(PATH_TO_ROOT . '/forum/forum_functions.php');
+		$blog_id = $request->get_getint('blog_id');
 
-?>
+		$actual_blog = BlogService::get_blog($blog_id);
+
+		$updated_blog = new Blog();
+		$updated_blog->set_properties(array(
+			'id' => $blog_id,
+			'author_id' => $actual_blog->get_author_id(),
+			'name' => $actual_blog->get_name(),
+			'about' => $actual_blog->get_about(),
+			'description' => $actual_blog->get_description(),
+			'created' => time(),
+			'approved' => 1
+		));
+		BlogService::update_blog($updated_blog);
+
+		AppContext::get_response()->redirect(BlogUrlBuilder::config_manager_module()->absolute());
+
+		
+	}
+}

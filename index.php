@@ -44,6 +44,9 @@ if(!$config->get_display_top_menu()){
 $url_controller_mappers = array(
 	//Admin
 	new UrlControllerMapper('AdminConfigBlogController', '`^/admin/config`'),
+	new UrlControllerMapper('AdminApproveBlogController', '`^/admin/manager/approve(?:/([0-9]+))?/?$`', array('blog_id')),
+	new UrlControllerMapper('AdminDisapproveBlogController', '`^/admin/manager/desapprove(?:/([0-9]+))?/?$`', array('blog_id')),
+	new UrlControllerMapper('AdminManagerBlogController', '`^/admin/manager`'),
 
 	//Manager
 	new UrlControllerMapper('CreatorBlogController', '`^/creator`'),

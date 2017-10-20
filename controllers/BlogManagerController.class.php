@@ -46,9 +46,6 @@ class BlogManagerController extends ModuleController {
 
 		$this->blog_author_id = BlogService::get_blog($this->blog_id)->get_author_id();
 
-		BlogService::test($this->blog_author_id);
-		BlogService::test($this->user->get_id());
-
 		if($this->user->get_id() == $this->blog_author_id){
 			$this->view->put('IS_AUTHOR_BLOG', True);
 		}else{

@@ -76,7 +76,6 @@ class BlogUrlBuilder
 	public static function manage_blog($blog_id){
 
 		return DispatchManager::get_url(self::$dispatcher, '/'.$blog_id.'/manager/');
-
 	}
 
 	public static function manage_posts($blog_id){
@@ -104,6 +103,14 @@ class BlogUrlBuilder
 
 	public static function config_manager_module(){
 		return DispatchManager::get_url(self::$dispatcher, '/admin/manager');
+	}
+
+	public static function approve_blog($blog_id){
+		return DispatchManager::get_url(self::$dispatcher, '/admin/manager/approve/'.$blog_id);
+	}
+
+	public static function disapprove_blog($blog_id){
+		return DispatchManager::get_url(self::$dispatcher, '/admin/manager/desapprove/'.$blog_id);
 	}
 }
 ?>

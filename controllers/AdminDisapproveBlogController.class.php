@@ -1,8 +1,9 @@
+
 <?php
 /*##################################################
- *                    BlogExtensionPointProvider.class.php
+ *                           AdminDisapproveBlogController.class.php
  *                            -------------------
- *   begin                : November 04, 2014
+ *   begin                : October 20, 2017
  *   copyright            : (C) 2014 Anthony VIOLET
  *   email                : anthony.violet@outlook.fr
  *
@@ -25,40 +26,32 @@
  *
  ###################################################*/
 
-class BlogExtensionPointProvider extends ExtensionPointProvider
-{
-	public function __construct()
-	{
-		parent::__construct('blog');
-	}
+class AdminDisapproveBlogController extends AdminModuleController {
 
-	public function menus()
-	{
-		return new ModuleMenus(array(
-			new BlogModuleMiniMenu()
+	private $view,
+			$lang;
+
+	public function execute(HTTPRequestCustom $request){
+
+		$blog_id = $request->get_getint('blog_id');
+
+		$actual_blog = BlogService::get_blog($blog_id);
+
+		$updated_blog = new Blog();
+		$updated_blog->set_properties(array(
+			'id' => $blog_id,
+			'author_id' => $actual_blog->get_author_id(),
+			'name' => $actual_blog->get_name(),
+			'about' => $actual_blog->get_about(),
+			'description' => $actual_blog->get_description(),
+			'created' => time(),
+			'approved' => 0
 		));
-	}
+		BlogService::test($updated_blog);
+		BlogService::update_blog($updated_blog);
 
-	public function comments()
-	{
-		return new CommentsTopics(array(new BlogCommentsTopic()));
-	}
-	
-	public function url_mappings()
-	{
-		return new UrlMappings(array(new DispatcherUrlMapping('/blog/index.php')));
-	}
+		AppContext::get_response()->redirect(BlogUrlBuilder::config_manager_module()->absolute());
 
-	public function css_files()
-	{
-		$module_css_files = new ModuleCssFiles();
-		$module_css_files->adding_running_module_displayed_file('blog.css');
-		return $module_css_files;
-	}
-
-	public function tree_links()
-	{
-		return new BlogTreeLinks();
+		
 	}
 }
-?>

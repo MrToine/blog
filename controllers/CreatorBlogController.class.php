@@ -27,8 +27,6 @@
 
 class CreatorBlogController extends ModuleController {
 
-	/* EN PLEIN AMENAGEMENT */
-
 	private $view,
 			$blog_name,
 			$blog_id,
@@ -57,18 +55,27 @@ class CreatorBlogController extends ModuleController {
 				{
 					$this->blog = new Blog();
 					$this->blog->set_name($form->get_value('name'));
+					$this->blog->set_about($form->get_value('about'));
 					$this->blog->set_description($form->get_value('description'));
 					$this->blog->set_author_id($this->user->get_id());
 					$this->blog->set_created(new Date());
 					$this->blog->set_approved(0);
-					BlogService::test($this->blog);
 					BlogService::create_blog($this->blog);
+
+					$alert_create_blog = new AdministratorAlert();
+					$alert_create_blog->set_entitled('Création d\'un blog. Cliquez sur ce lien pour approuver ou supprimer cette demande.');
+					$alert_create_blog->set_fixing_url('/blog/admin/manager');
+					$alert_create_blog->set_priority('ADMIN_ALERT_MEDIUM_PRIORITY');
+					$alert_create_blog->set_status('ADMIN_ALERT_STATUS_UNREAD');
+
+					AdministratorAlertService::save_alert($alert_create_blog);
+					AppContext::get_response()->redirect(BlogUrlBuilder::manage_blog(BlogService::count_blogs() += 1)->absolute());
 				}
 			}
 
 			$this->view->put('form', $form->display());
 		}else{
-			die('blog trouver :(');
+			AppContext::get_response()->redirect(BlogUrlBuilder::home()->absolute());
 		}
 
 			
@@ -95,6 +102,7 @@ class CreatorBlogController extends ModuleController {
 		$fieldset->add_field(new FormFieldTextEditor('name', $this->lang['creator.blog_name'], '', array(
 			'maxlength' => 255, 'description' => $this->lang['creator.blog_name_desc'], 'required' => true)
 		));
+		$fieldset->add_field(new FormFieldRichTextEditor('about', $this->lang['creator.about'], '', array('required' => true)));
 		// DESCRIPTION
 		$fieldset->add_field(new FormFieldRichTextEditor('description', $this->lang['creator.description'], '', array('required' => true)));
 

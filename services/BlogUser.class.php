@@ -78,6 +78,12 @@ class BlogUser {
 		
 	}
 
+	public function get_updated(){
+
+		return $this->_updated;
+		
+	}
+
 	public function get_approved(){
 
 		return $this->_approved;
@@ -158,6 +164,18 @@ class BlogUser {
 
 	}
 
+	public function set_updated($updated){
+
+		$updated = (int) $updated;
+
+		if($updated > 0){
+
+			$this->_updated = date('d/m/Y', $updated);
+
+		}
+
+	}
+
 	public function approved($approved){
 
 		$approved = (int) $approved;
@@ -180,6 +198,7 @@ class BlogUser {
 			'slug' => TextHelper::htmlspecialchars($this->get_slug()),
 			'content' => $this->get_content(),
 			'created' => TextHelper::htmlspecialchars($this->get_created()),
+			'updated' => TextHelper::htmlspecialchars($this->get_updated()),
 			'approved' => TextHelper::htmlspecialchars($this->get_approved())
 		);
 	}
@@ -193,6 +212,7 @@ class BlogUser {
 		$this->_slug = $properties['slug'];
 		$this->_content = $properties['content'];
 		$this->_created = $properties['created'];
+		$this->_updated = $properties['updated'];
 		$this->_approved = $properties['approved'];
 	}
 

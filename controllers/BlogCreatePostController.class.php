@@ -55,9 +55,8 @@ class BlogCreatePostController extends ModuleController {
 				}else{
 					$approved = 0;
 				}
-				$this->post = new BlogUser();
-				$this->post->set_properties(array(
-					'blog_id' => $this->blog_id,
+				PersistenceContext::get_querier()->insert(PREFIX.'blog_articles', array(
+				    'blog_id' => $this->blog_id,
 					'author_id' => $this->user->get_id(),
 					'name' => $form->get_value('title'),
 					'slug' => BlogService::generate_slug($form->get_value('title')),
@@ -66,7 +65,6 @@ class BlogCreatePostController extends ModuleController {
 					'updated' => time(),
 					'approved' => $approved
 				));
-			    BlogService::create_post($this->post);
 				$this->view->put('FORM_OK', True);
 			}
 		}
