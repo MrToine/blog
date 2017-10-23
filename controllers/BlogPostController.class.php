@@ -30,7 +30,7 @@ class BlogPostController extends ModuleController {
 	private $view,
 			$blog_name,
 			$blog_post,
-			$post_name,
+			$post,
 			$lang,
 			$user;
 	
@@ -45,39 +45,38 @@ class BlogPostController extends ModuleController {
 		$this->user = AppContext::get_current_user();
 
 		$result = BlogService::get_blog_articles($this->blog_post);
-		$post = new BlogUser();
-		$post->set_properties($result);
+		$this->post = new BlogUser();
+		$this->post->set_properties($result);
+		$this->blog_name = BlogService::get_blog($this->post->get_blog_id())->get_name();
 
 		/* Comments */ 
 
 		$comments_topic = new BlogCommentsTopic();
-		$comments_topic->set_id_in_module($post->get_id());
-		$comments_topic->set_url(BlogUrlBuilder::display_comments_posts($post->get_slug()));
+		$comments_topic->set_id_in_module($this->post->get_id());
+		$comments_topic->set_url(BlogUrlBuilder::display_comments_posts($this->post->get_slug()));
 
-		if($this->user->get_id() == $post->get_author_id()){
+		if($this->user->get_id() == $this->post->get_author_id()){
 			$this->view->put('IS_AUTHOR_BLOG', True);
 		}
 
 		$this->view->put_all(array(
-				'ID' => $post->get_id(),
-				'NAME' => $post->get_name(),
-				'SLUG' => $post->get_slug(),
-				'CONTENT' => $post->get_content(),
-				'CREATED' => date('d/m/Y', $post->get_created()),
-				'APPROVED' => $post->get_approved(),
+				'ID' => $this->post->get_id(),
+				'NAME' => $this->post->get_name(),
+				'SLUG' => $this->post->get_slug(),
+				'CONTENT' => $this->post->get_content(),
+				'CREATED' => date('d/m/Y', $this->post->get_created()),
+				'APPROVED' => $this->post->get_approved(),
 
 				'USER' => $result['display_name'],
 				'LINK_USER_PROFILE' => UserUrlBuilder::profile($result['user_id'])->absolute(),
-				'MANAGE_BLOG_LINK' => BlogUrlBuilder::manage_blog($post->get_blog_id())->absolute(),
-				'MANAGE_NEWS_LINK' => BlogUrlBuilder::manage_posts($post->get_blog_id())->absolute(),
-				'CREATE_POST_LINK' => BlogUrlBuilder::create_post($post->get_blog_id())->absolute(),
+				'MANAGE_BLOG_LINK' => BlogUrlBuilder::manage_blog($this->post->get_blog_id())->absolute(),
+				'MANAGE_NEWS_LINK' => BlogUrlBuilder::manage_posts($this->post->get_blog_id())->absolute(),
+				'CREATE_POST_LINK' => BlogUrlBuilder::create_post($this->post->get_blog_id())->absolute(),
 				'USER_ID' => $result['user_id'],
 				'USER_LEVEL_CLASS' => UserService::get_level_class($result['level']),
 				'COMMENTS' => $comments_topic->display()
 
 		));
-
-		$this->post_name = $post->get_name();
 
 		return $this->generate_response();
 	}
@@ -106,8 +105,8 @@ class BlogPostController extends ModuleController {
 
 		$breadcrumb = $graphical_environment->get_breadcrumb();
 		$breadcrumb->add($this->lang['module_title'], BlogUrlBuilder::home()->rel());
-		$breadcrumb->add($this->blog_name);
-		$breadcrumb->add($this->post_name);
+		$breadcrumb->add($this->blog_name, BlogUrlBuilder::blog_user($this->post->get_author_id())->rel());
+		$breadcrumb->add($this->post->get_name());
 		
 		return $response;
 	}

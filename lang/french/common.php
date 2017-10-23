@@ -35,7 +35,11 @@ $lang = array(
 	'module_title' => 'Blogs',
 	'add_page' => 'Ajouter',
 	'create_blog' => 'Créer mon blog',
-
+	'manager_blog' => 'Gestion de mon blog',
+	'add_post' => 'Ajouter un billet',
+	'edit_post' => 'Editer',
+	'list_posts' => 'Liste des billets',
+ 
 	//->Liens administation
 	'admin.config' => 'Configuration des blogs',
 
@@ -54,6 +58,7 @@ $lang = array(
 	'config.form.blog_menu' => 'Permettre aux blogs d\'avoir un menu propre à lui',
 	'config.form.success' => 'Les informations ont bien été enregistrés, et ont été mis à jours',
 
+
 	//->Administration module
 	'admin.module.manager' => 'Gestion des blogs',
 	'admin.manager.approved' => 'Approbation',
@@ -62,6 +67,7 @@ $lang = array(
 	'admin.manager.blog.not.approved' => 'Hors ligne !',
 
 	'donation' => 'Plus de 20 heures ont été nécessaire pour le développement de ce module. Si vous voulez soutenir le projet, et soutenir son créateur vous pouvez faire un don paypal via le bouton ci-dessous. Ce n\'est bien sûre pas obligatoire et même sans ce petit geste, je garanti des modules de qualité et un suivis personnel pour chaque utilisateurs du module. Mais un simple don permet d\'encourager et de remercier un créateur pour son travail. Anthony VIOLET',
+
 	'mail.creator.module' => 'anthony.violet@outlook.be',
 
 	// Liste des blogs
@@ -86,6 +92,7 @@ $lang = array(
 
 	// Manager du blog
 	'manager.manager_head_message' => 'Vous êtes dans l\'administration de votre blog. Vous pouvez ici, gérer l\'ensemble des options. Créer, modifier, supprimer des articles. Gérer l\'apparence et le contenu de votre blog.',
+	'manager.blog.not.approved' => 'Votre blog à bien été créer, cependant un administrateur dois l\'approuver. Vous pouvez bien entendu créer et éditer des posts ainsi que voir votre blog disponible via le lien suivant',
 	'manager.admin_blog' => 'Administration du blog',
 	'manager.admin_blog_link' => '#',
 	'manager.create_post' => 'Créer un billet',

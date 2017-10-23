@@ -2,6 +2,10 @@
 <section>
 	<header>
 		<p>{@manager.manager_head_message}</p>
+		# IF IS_NOT_APPROVED #
+			<div class="warning">{@manager.blog.not.approved}</div>
+		# END IF #
+		<span style="font-size:22pt;text-align:center"><a href="{LINK_BLOG}">Voir mon blog</a></span>
 	</header>
 	<article>
 		<ul class="blog_user_menu">

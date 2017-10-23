@@ -45,9 +45,14 @@ class BlogManagerController extends ModuleController {
 		$this->user = AppContext::get_current_user();
 
 		$this->blog_author_id = BlogService::get_blog($this->blog_id)->get_author_id();
+		$this->blog_name = BlogService::get_blog($this->blog_id)->get_name();
+		$blog_is_approved = BlogService::get_blog($this->blog_id)->get_approved();
 
 		if($this->user->get_id() == $this->blog_author_id){
 			$this->view->put('IS_AUTHOR_BLOG', True);
+			if(!$blog_is_approved){
+				$this->view->put('IS_NOT_APPROVED', True);
+			}
 		}else{
 			die('pas ton blog');
 		}
@@ -68,6 +73,7 @@ class BlogManagerController extends ModuleController {
 		$this->view->put_all(array(
 			'CREATE_POST_LINK' => BlogUrlBuilder::create_post($this->blog_id)->absolute(),
 			'MANAGER_POSTS_LINK' => BlogUrlBuilder::manage_posts($this->blog_id)->absolute(),
+			'LINK_BLOG' => BlogUrlBuilder::blog_user($this->blog_id)->absolute()
 		));
 
 		return $this->generate_response();
@@ -83,9 +89,15 @@ class BlogManagerController extends ModuleController {
 	private function generate_response()
 	{
 		$response = new SiteDisplayResponse($this->view);
+
 		$graphical_environment = $response->get_graphical_environment();
 		$graphical_environment->set_page_title($this->lang['module_title']);
-		
+
+		$breadcrumb = $graphical_environment->get_breadcrumb();
+		$breadcrumb->add($this->lang['module_title'], BlogUrlBuilder::home()->rel());
+		$breadcrumb->add($this->blog_name, BlogUrlBuilder::blog_user($this->blog_author_id));
+		$breadcrumb->add($this->lang['manager_blog']);
+
 		return $response;
 	}
 

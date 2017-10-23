@@ -31,6 +31,7 @@ class BlogEditPostController extends ModuleController {
 			$view,
 			$blog_author_id,
 			$user,
+			$blog,
 			$post,
 			$post_id;
 
@@ -41,11 +42,10 @@ class BlogEditPostController extends ModuleController {
 		$this->init();
 
 		$this->user = AppContext::get_current_user();
-
+		$this->blog = BlogService::get_blog($this->blog_id);
 		$this->post = BlogService::get_post($this->post_id);
-		$this->blog_author_id = $this->post->get_author_id();
 
-		if($this->blog_author_id == $this->user->get_id()){
+		if($this->blog->get_author_id() == $this->user->get_id()){
 			$this->view->put('IS_AUTHOR_BLOG', True);
 		}
 
@@ -114,8 +114,15 @@ class BlogEditPostController extends ModuleController {
 
 	private function generate_response(){
 		$response = new SiteDisplayResponse($this->view);
+
 		$graphical_environment = $response->get_graphical_environment();
 		$graphical_environment->set_page_title($this->lang['module_title']);
+
+		$breadcrumb = $graphical_environment->get_breadcrumb();
+		$breadcrumb->add($this->lang['module_title'], BlogUrlBuilder::home()->rel());
+		$breadcrumb->add($this->blog->get_name(), BlogUrlBuilder::blog_user($this->blog->get_author_id())->rel());
+		$breadcrumb->add($this->lang['manager_blog'], BlogUrlBuilder::manage_blog($this->blog_id)->rel());
+		$breadcrumb->add($this->lang['edit_post']);
 
 		return $response;
 	}

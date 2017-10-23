@@ -60,7 +60,7 @@ class CreatorBlogController extends ModuleController {
 					$this->blog->set_author_id($this->user->get_id());
 					$this->blog->set_created(new Date());
 					$this->blog->set_approved(0);
-					BlogService::create_blog($this->blog);
+					$blog_id = BlogService::create_blog($this->blog);
 
 					$alert_create_blog = new AdministratorAlert();
 					$alert_create_blog->set_entitled('Création d\'un blog. Cliquez sur ce lien pour approuver ou supprimer cette demande.');
@@ -69,7 +69,7 @@ class CreatorBlogController extends ModuleController {
 					$alert_create_blog->set_status('ADMIN_ALERT_STATUS_UNREAD');
 
 					AdministratorAlertService::save_alert($alert_create_blog);
-					AppContext::get_response()->redirect(BlogUrlBuilder::manage_blog(BlogService::count_blogs() += 1)->absolute());
+					AppContext::get_response()->redirect(BlogUrlBuilder::manage_blog($blog_id)->absolute());
 				}
 			}
 

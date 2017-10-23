@@ -37,11 +37,15 @@ class BlogUserController extends ModuleController {
 	{
 
 		$this->blog_id = $request->get_getint('user_id');
-		$this->blog_name = $this->get_blog()->get_name();
+		$this->blog_name = $this->get_blog($this->blog_id)->get_name();
 
 		$this->init();
 
 		$this->user = AppContext::get_current_user();
+
+		if(BlogService::get_blog($this->blog_id)->get_approved() == 0 AND BlogService::get_blog($this->blog_id)->get_author_id() != $this->user->get_id()){
+			AppContext::get_response()->redirect(BlogUrlBuilder::home());
+		}
 
 		$config = BlogService::get_config();
 
@@ -114,7 +118,7 @@ class BlogUserController extends ModuleController {
 
 		$breadcrumb = $graphical_environment->get_breadcrumb();
 		$breadcrumb->add($this->lang['module_title'], BlogUrlBuilder::home()->rel());
-		$breadcrumb->add($this->blog_name, 'LIEN BLOG');
+		$breadcrumb->add($this->blog_name, BlogUrlBuilder::blog_user($this->blog_id)->rel());
 		
 		return $response;
 	}
