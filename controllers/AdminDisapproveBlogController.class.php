@@ -1,4 +1,3 @@
-
 <?php
 /*##################################################
  *                           AdminDisapproveBlogController.class.php

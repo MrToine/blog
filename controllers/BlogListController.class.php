@@ -1,9 +1,9 @@
 <?php
 /*##################################################
- *                                 BlogController.class.php
+ *                                 BlogListController.class.php
  *                            -------------------
- *   begin                : October 25, 2017
- *   copyright            : (C) 2017 Anthony VIOLET
+ *   begin                : November 01, 2014
+ *   copyright            : (C) 2014 Anthony VIOLET
  *   email                : anthony.violet@outlook.fr
  *
  *
@@ -25,7 +25,7 @@
  *
  ###################################################*/
 
-class BlogController extends ModuleController {
+class BlogListController extends ModuleController {
 	
 	private $view,
 			$lang;
@@ -33,11 +33,42 @@ class BlogController extends ModuleController {
 	public function execute(HTTPRequestCustom $request)
 	{
 		$this->init();
+
+		$config = BlogService::get_config();
 		
+		$result = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog.author_id');
+
+		while ($row = $result->fetch())
+		{
+
+			$blog = new Blog();
+			$blog->set_properties($row);
+
+			$this->view->assign_block_vars('blog', $blog->get_array_tpl_vars(), array(
+				'CREATED' => $blog->get_created()->get_timestamp(),
+				'LINK_BLOG_USER'=> BlogUrlBuilder::blog_user($blog->get_id())->absolute(),
+				'USERNAME' => $row['display_name'],
+				'LINK_USER_PROFILE'=> UserUrlBuilder::profile($row['user_id'])->absolute(),
+				'USER_ID'=> $row['user_id'],
+				'USER_LEVEL_CLASS'=> UserService::get_level_class($row['level'])
+			));
+
+		}
+		
+		$result->dispose();
+
+		if($config->get_display_blogs() == 1){
+			$display_bloc = True;
+		}else{
+			$display_bloc = False;
+		}
+
 		$this->view->put_all(array(
-			'EDITO' => BlogService::get_config()->get_blogs_edito(),
-			'LINK_LIST' => BlogUrlBuilder::blog_list()->absolute()
-		));
+				'HEAD_USER' => $this->lang['head_user'],
+				'HEAD_NAME' => $this->lang['head_name'],
+				'HEAD_CREATED' => $this->lang['head_created'],
+				'DISPLAY_BLOC' => $display_bloc
+			));
 
 		return $this->generate_response();
 	}
@@ -45,7 +76,7 @@ class BlogController extends ModuleController {
 	private function init()
 	{
 		$this->lang = LangLoader::get('common', 'blog');
-		$this->view = new FileTemplate('blog/BlogController.tpl');
+		$this->view = new FileTemplate('blog/BlogListController.tpl');
 		$this->view->add_lang($this->lang);
 	}
 	
@@ -54,6 +85,10 @@ class BlogController extends ModuleController {
 		$response = new SiteDisplayResponse($this->view);
 		$graphical_environment = $response->get_graphical_environment();
 		$graphical_environment->set_page_title($this->lang['module_title']);
+
+		$breadcrumb = $graphical_environment->get_breadcrumb();
+		$breadcrumb->add($this->lang['module_title'], BlogUrlBuilder::home()->rel());
+		$breadcrumb->add($this->lang['list_blog']);
 		
 		return $response;
 	}

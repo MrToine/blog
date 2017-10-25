@@ -27,11 +27,22 @@
 
 class BlogConfig extends AbstractConfigData
 {
+	const NAME = 'name';
+
 	const ITEMS_PER_PAGE = 'items_per_page';
 	const FORBIDDEN_TAGS = 'forbidden_tags';
 	const MAXIMUM_LINKS_MESSAGE = 'maximum_links_message';
 	const AUTHORIZATIONS = 'authorizations';
 	
+	public function get_name(){
+		return $this->get_property('name');
+	}
+
+	public function set_name($name)
+	{
+		$this->set_property(self::NAME, $name);
+	}
+
 	 /**
 	 * @method Get items per page
 	 */

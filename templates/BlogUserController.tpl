@@ -5,7 +5,7 @@
 				# IF IS_AUTHOR_BLOG #
 						<h3>Gestion du blog</h3>
 						<p><a href="{CREATE_POST_LINK}">{@manager.create_post}</a></p>
-						<p><a href="{MANAGE_NEWS_LINK}">{@manager.manage_posts}</a></p>
+						<p><a href="{MANAGE_POSTS_LINK}">{@manager.manage_posts}</a></p>
 						<p><a href="{MANAGE_BLOG_LINK}">{@manager.admin_blog}</a></p>
 				# ENDIF #
 				# IF MENU_FOR_BLOG #

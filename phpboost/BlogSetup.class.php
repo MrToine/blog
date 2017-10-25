@@ -60,6 +60,63 @@ class BlogSetup extends DefaultModuleSetup
 
 	}
 
+	public function upgrade($installed_version){
+		$fields_config = array(
+			'display_left_column' => array(
+				'type' => 'integer', 
+				'length' => 1, 
+				'notnull' => 1,
+				'default' => 0
+			),
+			'display_right_column' => array(
+				'type' => 'integer', 
+				'lenght' => 1, 
+				'notnull' => 1,
+				'default' => 0
+			),
+			'display_top_menu' => array(
+				'type' => 'integer', 
+				'lenght' => 1, 
+				'notnull' => 1,
+				'default' => 0
+			),
+			'nb_blogs_per_user' => array(
+				'type' => 'integer',
+				'lenght' => 5,
+				'notnull' => 1,
+				'default' => 1
+			),
+			'display_blogs' => array(
+				'type' => 'integer',
+				'lenght' => 11,
+				'notnull' => 11,
+				'default' => 0
+			),
+			'style_for_blog' => array(
+				'type' => 'integer',
+				'lenght' => 1,
+				'notnull' => 1,
+				'default' => 1
+			),
+			'menu_for_blog' => array(
+				'type' => 'integer',
+				'lenght' => 1,
+				'notnull' => 1,
+				'default' => 0
+			),
+			'blogs_edito' => array(
+				'type' => 'string',
+				'lenght' => 65000,
+				'notnull' => 1,
+				'default' => 1,
+			)
+		);
+
+		PersistenceContext::get_dbms_utils()->create_table(self::$blog_table['config'], $fields_config);
+		
+		return "2.0b";
+	}
+
 	public function drop_tables(){
 
 		PersistenceContext::get_dbms_utils()->drop(self::$blog_table['blog']);

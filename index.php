@@ -43,23 +43,24 @@ if(!$config->get_display_top_menu()){
  
 $url_controller_mappers = array(
 	//Admin
-	new UrlControllerMapper('AdminConfigBlogController', '`^/admin/config`'),
-	new UrlControllerMapper('AdminApproveBlogController', '`^/admin/manager/approve(?:/([0-9]+))?/?$`', array('blog_id')),
-	new UrlControllerMapper('AdminDisapproveBlogController', '`^/admin/manager/desapprove(?:/([0-9]+))?/?$`', array('blog_id')),
-	new UrlControllerMapper('AdminManagerBlogController', '`^/admin/manager`'),
+	new UrlControllerMapper('AdminConfigBlogController', '`/admin/config`'),
+	new UrlControllerMapper('AdminApproveBlogController', '`/admin/manager/approve(?:/([0-9]+))?/?$`', array('blog_id')),
+	new UrlControllerMapper('AdminDisapproveBlogController', '`/admin/manager/desapprove(?:/([0-9]+))?/?$`', array('blog_id')),
+	new UrlControllerMapper('AdminManagerBlogController', '`/admin/manager`'),
 
 	//Manager
-	new UrlControllerMapper('CreatorBlogController', '`^/creator`'),
-	new UrlControllerMapper('BlogDeletePostController', '`^(?:/([0-9]+))?/manager/delete(?:/([0-9]+))?/?$`', array('blog_id', 'post_id')),
-	new UrlControllerMapper('BlogEditPostController', '`^(?:/([0-9]+))?/manager/edit(?:/([0-9]+))?/?$`', array('blog_id', 'post_id')),
-	new UrlControllerMapper('BlogCreatePostController', '`^(?:/([0-9]+))?/manager/create`', array('blog_id')),
-	new UrlControllerMapper('BlogPostsManagerController', '`^(?:/([0-9]+))?/manager/posts`', array('blog_id')),
-	new UrlControllerMapper('BlogManagerController', '`^(?:/([0-9]+))?/manager`', array('blog_id')),
+	new UrlControllerMapper('CreatorBlogController', '`/creator`'),
+	new UrlControllerMapper('BlogDeletePostController', '`(?:/([0-9]+))?/manager/delete(?:/([0-9]+))?/?$`', array('blog_id', 'post_id')),
+	new UrlControllerMapper('BlogEditPostController', '`(?:/([0-9]+))?/manager/edit(?:/([0-9]+))?/?$`', array('blog_id', 'post_id')),
+	new UrlControllerMapper('BlogCreatePostController', '`(?:/([0-9]+))?/manager/create`', array('blog_id')),
+	new UrlControllerMapper('BlogPostsManagerController', '`(?:/([0-9]+))?/manager/posts`', array('blog_id')),
+	new UrlControllerMapper('BlogManagerController', '`(?:/([0-9]+))?/manager`', array('blog_id')),
 	
 	//Display
-	new UrlControllerMapper('BlogPostController', '`^/post(?:/([a-z0-9-_]+))?/?`', array('post_slug')),
-	new UrlControllerMapper('BlogUserController', '`^(?:/([0-9]+))?/?$`', array('user_id')),
-	new UrlControllerMapper('BlogController', '`^/list`')
+	new UrlControllerMapper('BlogPostController', '`/post(?:/([a-z0-9-_]+))?/?`', array('post_slug')),
+	new UrlControllerMapper('BlogUserController', '`/view(?:/([0-9]+))?/?$`', array('user_id')),	
+	new UrlControllerMapper('BlogListController', '`/list`'),
+	new UrlControllerMapper('BlogController', '`^`'),
 
 );
  

@@ -33,6 +33,7 @@
 $lang = array(
 	// Pages title
 	'module_title' => 'Blogs',
+	'list_blog' => 'Liste des blogs',
 	'add_page' => 'Ajouter',
 	'create_blog' => 'Créer mon blog',
 	'manager_blog' => 'Gestion de mon blog',
@@ -56,6 +57,7 @@ $lang = array(
 	'config.form.list' => 'En liste',
 	'config.form.blog_style' => 'Permettre aux blogs d\'avoir un style différent au site',
 	'config.form.blog_menu' => 'Permettre aux blogs d\'avoir un menu propre à lui',
+	'config.form.edito' => 'Ajoute une page d\'accueil au module',
 	'config.form.success' => 'Les informations ont bien été enregistrés, et ont été mis à jours',
 
 
@@ -69,6 +71,8 @@ $lang = array(
 	'donation' => 'Plus de 20 heures ont été nécessaire pour le développement de ce module. Si vous voulez soutenir le projet, et soutenir son créateur vous pouvez faire un don paypal via le bouton ci-dessous. Ce n\'est bien sûre pas obligatoire et même sans ce petit geste, je garanti des modules de qualité et un suivis personnel pour chaque utilisateurs du module. Mais un simple don permet d\'encourager et de remercier un créateur pour son travail. Anthony VIOLET',
 
 	'mail.creator.module' => 'anthony.violet@outlook.be',
+	//->ACCUEIL
+	'home.view.list' => 'Voir la liste des Blogs',
 
 	// Liste des blogs
 	'head_user' => 'Auteur du blog',

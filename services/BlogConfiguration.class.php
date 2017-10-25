@@ -33,7 +33,8 @@ class BlogConfiguration {
 			$_nb_blogs_per_user,
 			$_display_blogs,
 			$_style_for_blog,
-			$_menu_for_blog;
+			$_menu_for_blog,
+			$_blogs_edito;
 
 	public function get_display_left_column(){
 		return $this->_display_left_column;
@@ -61,6 +62,10 @@ class BlogConfiguration {
 
 	public function get_menu_for_blog(){
 		return $this->_menu_for_blog;
+	}
+
+	public function get_blogs_edito(){
+		return $this->_blogs_edito;
 	}
 
 	public function set_display_left_column($display_left_column){
@@ -103,6 +108,10 @@ class BlogConfiguration {
 		$this->_menu_for_blog = $menu_for_blog;
 	}
 
+	public function set_blogs_edito($blogs_edito){
+		$this->_blogs_edito = $blogs_edito;
+	}
+
 	public function get_properties(){
 		return array(
 			'display_left_column' => $this->get_display_left_column(),
@@ -111,7 +120,8 @@ class BlogConfiguration {
 			'nb_blogs_per_user' => $this->get_nb_blogs_per_user(),
 			'display_blogs' => $this->get_display_blogs(),
 			'style_for_blog' => $this->get_style_for_blog(),
-			'menu_for_blog' => $this->get_menu_for_blog()
+			'menu_for_blog' => $this->get_menu_for_blog(),
+			'blogs_edito' => TextHelper::htmlspecialchars($this->get_blogs_edito())
 		);
 	}
 
@@ -123,6 +133,7 @@ class BlogConfiguration {
 		$this->_display_blogs = $properties['display_blogs'];
 		$this->_style_for_blog = $properties['style_for_blog'];
 		$this->_menu_for_blog = $properties['menu_for_blog'];
+		$this->_blogs_edito = $properties['blogs_edito'];
 	}
 
 	public function msession_get_array_tpl_vars(){
@@ -134,6 +145,7 @@ class BlogConfiguration {
 			'DISPLAY_BLOGS' => $this->_display_blogs,
 			'STYLE_FOR_BLOG' => $this->_style_for_blog,
 			'MENU_FOR_BLOG' => $this->_menu_for_blog,
+			'BLOGS_EDITO' => FormatingHelper::second_parse($this->_blogs_edito),
 		);	
 	}
 }

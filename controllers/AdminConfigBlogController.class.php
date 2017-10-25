@@ -1,4 +1,3 @@
-
 <?php
 /*##################################################
  *                           CreatorManageBlog.class.php
@@ -54,6 +53,7 @@ class AdminConfigBlogController extends AdminModuleController {
 					/* PROCHAINE MAJ
 					'style_for_blog' => $form_config->get_value('blog_style'), 
 					'menu_for_blog' => $form_config->get_value('blog_menu')*/
+					'blogs_edito' => $form_config->get_value('edito')
 				));
 				$this->view->put_all(array(
 					'FORM_OK' => true,
@@ -87,6 +87,10 @@ class AdminConfigBlogController extends AdminModuleController {
 
 		$fieldset->add_field(new FormFieldCheckbox('blog_style', $this->lang['config.form.blog_style'],$this->config->get_style_for_blog()));
 		$fieldset->add_field(new FormFieldCheckbox('blog_menu', $this->lang['config.form.blog_menu'], $this->config->get_menu_for_blog()));*/
+
+		$fieldset->add_field(new FormFieldRichTextEditor('edito', $this->lang['config.form.edito'], $this->config->get_blogs_edito(), array(
+			'required' => False
+		)));
 
 		// BUTTONS
 		$buttons_fieldset = new FormFieldsetSubmit('buttons');

@@ -1,3 +1,8 @@
++---------------------------------------------------------------------+
+|                                                                     |
+|                     MISE A JOUR DU DEVELOPPEMENT                    |
+|                                                                     |
++---------------------------------------------------------------------+
 ----11-10-2017----
 je me suis arrêté a la création d'un billet. Il faut repérer l'erreur (dans BlogService) -- Surement a voir avec BlogUser.class
 L'erreur actuelle viens de get_properties() qui ne peut pas etre null.
@@ -5,3 +10,42 @@ L'erreur actuelle viens de get_properties() qui ne peut pas etre null.
 ----12-10-2017----
 ->Créer billet = ok
 ->mini menu admin (dans liste post et affichage d'un post) = ok
+
+----24-10-2014----
+->Modification fichier BlogUserController: le lien vers la liste des billets fonctionne correctement.
+
++---------------------------------------------------------------------+
+|                                                                     |
+|                     SUGGESTION D'AMELIORATIONS                      |
+|                                                                     |
++---------------------------------------------------------------------+
+Swan:
+1/ Par contre, y aura t-il une page d'accueil principale pour le module blog ? car là on arrive directement sur la liste des blogs existants.
+
+2/ dans configuration (admin) -> information -> je garanti => je garantie
+
+3/ Dans administration / configuration : Est ce que l'on pourras classer les blogs en ordre , croissant ou décroissant par date de création ou nom d'auteurs
+
+4/ Toujours dans cette partie , ajouter peut être le champ recherche des membres non ?
+
+5/ Un mini-module avec les blog les plus actifs ou les plus vu , une sorte de Hits / Top .
+
+6/ Un flux rss pour chaque blog ( je sais pas si c'est possible). Comme ils ont fait pour les news ..
+
+7/ Voir dans l'administration le nombre total de blog créé / ou dans le mini-module. ( exemple: Notre site héberge XX Blog(s) )
+
++---------------------------------------------------------------------+
+|                                                                     |
+|                     DERNIERS FICHIERS MODIFIER                      |
+|                                                                     |
++---------------------------------------------------------------------+
+->config.ini (changement de version 1.0b => 2.0b)
+->BlogSetup.class.php (ajout de la fonction upgrade)
+->BlogConfiguration.class.php (Ajout du champ d'edito de la bdd)
+->BlogConfig.class.php (ajout de deux fonctions inutilisé pour le moment)
+->AdminConfigBlogController.class.php (ajout d'un champ de formulaire pour ajouter l'edito)
+->common.php (ajout de la description du champ ci-dessus)
+->index.php (ajout du lien vers la page d'accueil et du lien vers la liste des blogs)
+->BlogController.class.php deviens unepage d'accueil
+->La liste des blogs est dans BlogListController.class.php
+->Modification et ajout des TPL en conséquences

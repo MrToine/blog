@@ -218,6 +218,8 @@ class BlogUser {
 
 	public function get_array_tpl_vars()
 	{	
+		$short_content = substr(@strip_tags(FormatingHelper::second_parse($this->_content), '<br>'), 0, 500);
+
 		return array(
 			'ID' => $this->_id,
 			'BLOG_ID' => $this->_blog_id,
@@ -225,7 +227,7 @@ class BlogUser {
 			'NAME' => $this->_name,
 			'SLUG' => $this->_slug,
 			'CONTENT' => FormatingHelper::second_parse($this->_content),
-			'SHORT_CONTENT' => substr(@strip_tags($this->_content, '<br>'), 0, 500),
+			'SHORT_CONTENT' => $short_content,
 			'CREATED' => date('d/m/Y', $this->_created),
 			'APPROVED' => $this->_approved,
 		);

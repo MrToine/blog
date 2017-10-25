@@ -37,10 +37,10 @@ class BlogUrlBuilder
 	 */
 	public static function home(){
 
-		return DispatchManager::get_url(self::$dispatcher, '/list');
+		return DispatchManager::get_url(self::$dispatcher, '/');
 	}
 
-	public static function list(){
+	public static function blog_list(){
 		return DispatchManager::get_url(self::$dispatcher, '/list');
 	}
 
@@ -51,7 +51,7 @@ class BlogUrlBuilder
 
 	public static function blog_user($user_id){
 
-		return DispatchManager::get_url(self::$dispatcher, '/'.$user_id);
+		return DispatchManager::get_url(self::$dispatcher, '/view/'.$user_id);
 
 	}
 
