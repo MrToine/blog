@@ -18,5 +18,5 @@
 		# END post #
 	</table>
 # ELSE #
-	<div class="error">Ce n'est pas ton blog.</div>
+	<div class="error">manager.is.no.your.blog</div>
 # ENDIF #

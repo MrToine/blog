@@ -45,7 +45,8 @@ class AdminApproveBlogController extends AdminModuleController {
 			'about' => $actual_blog->get_about(),
 			'description' => $actual_blog->get_description(),
 			'created' => time(),
-			'approved' => 1
+			'approved' => 1,
+			'views' => $actual_blog->get_views()
 		));
 		BlogService::update_blog($updated_blog);
 

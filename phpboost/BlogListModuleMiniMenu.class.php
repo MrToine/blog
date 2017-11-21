@@ -1,9 +1,9 @@
 <?php
 /*##################################################
- *                           BlogModuleMiniMenu.class.php
+ *                           BlogListModuleMiniMenu.class.php
  *                            -------------------
- *   begin                : November 17, 2014
- *   copyright            : (C) 2014 Anthony VIOLET
+ *   begin                : October 26, 2017
+ *   copyright            : (C) 2017 Anthony VIOLET
  *   email                : anthony.violet@outlook.fr
  *
  *
@@ -25,7 +25,7 @@
  *
  ###################################################*/
 
-class BlogModuleMiniMenu extends ModuleMiniMenu {
+class BlogListModuleMiniMenu extends ModuleMiniMenu {
 
 	public function get_default_block()
     {
@@ -40,24 +40,51 @@ class BlogModuleMiniMenu extends ModuleMiniMenu {
  
     public function display($tpl = false)
     {
-    	$tpl = new FileTemplate('blog/menus/blog_mini.tpl');
+    	$tpl = new FileTemplate('blog/menus/blogList_mini.tpl');
  
     	// Permet d'assigner les variables tpl au template pour pouvoir ensuite donner un affichage différent selon la colonne où est situé le menu
 	    MenuService::assign_positions_conditions($tpl, $this->get_block());
  
 	    $lang = LangLoader::get('common', 'blog');
 
-	    $user = AppContext::get_current_user();
+	    $views_blogs = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog ORDER BY views DESC');
 
-	    $tpl->put_all(array(
-	    	'MODULE_MINI_TITLE' => $lang['module_mini_title'],
-	    	'MANAGE_A_BLOG_LINK' => BlogUrlBuilder::manage_blog($user->get_id())->absolute(),
-	    	'MANAGE_A_BLOG' => $lang['manage_a_blog'],
-	    	'CREATE_A_BLOG_LINK' => $lang['create_a_blog_link'],
-	    	'CREATE_A_BLOG' => $lang['create_a_blog'],
-	    	'BLOGS_LIST_LINK' => $lang['blogs_list_link'],
-	    	'BLOGS_LIST' => $lang['blogs_list'],
-	    ));
+		while ($row = $views_blogs->fetch())
+		{
+
+			$blog = new Blog();
+			$blog->set_properties($row);
+
+			$tpl->assign_block_vars('views_blogs', $blog->get_array_tpl_vars(), array(
+				'TXT_VIEWS' => $lang['module.views'],
+				'LINK' => BlogUrlBuilder::blog_user($blog->get_id())->absolute()
+			));
+
+		}
+
+		$lasts_blogs = PersistenceContext::get_querier()->select('SELECT * FROM '.PREFIX.'blog JOIN '.DB_TABLE_MEMBER.' ON '.DB_TABLE_MEMBER.'.user_id = '.PREFIX.'blog.author_id ORDER BY id DESC');
+
+		while ($row = $lasts_blogs->fetch())
+		{
+
+			$blog = new Blog();
+			$blog->set_properties($row);
+
+			$tpl->assign_block_vars('lasts_blogs', $blog->get_array_tpl_vars(), array(
+				'TXT_LAST' => $lang['module.views'],
+				'LINK' => BlogUrlBuilder::blog_user($blog->get_id())->absolute(),
+				'LINK_USER_PROFILE'=> UserUrlBuilder::profile($row['user_id'])->absolute(),
+				'USERNAME' => $row['display_name']
+			));
+
+		}
+
+		$tpl->put_all(array(
+			'BEST_BLOGS' => $lang['mini.best.blogs'],
+			'TITLE_VIEWS' => $lang['mini.list.views'],
+			'TITLE_LAST' => $lang['mini.list.last'],
+			'NB_BLOGS' => BlogService::count_blogs()
+		));
  
 	    // Retourne l'affichage du menu
 	    return $tpl->render();

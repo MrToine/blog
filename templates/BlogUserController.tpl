@@ -1,7 +1,7 @@
 <section>
 	<content>
 		<div class="content">
-			<div class="options info">
+			<div class="options info" style="width:200px;">
 				# IF IS_AUTHOR_BLOG #
 						<h3>Gestion du blog</h3>
 						<p><a href="{CREATE_POST_LINK}">{@manager.create_post}</a></p>
@@ -34,9 +34,7 @@
 							</a>
 							${LangLoader::get_message('the', 'common')}
 							{blogUserPost.CREATED}
-							# IF IS_AUTHOR_BLOG #
-								-- <a href="#">Editer</a>
-							# ENDIF #
+							- {NB_COMMENTS} {@module.comments}
 						</div>
 					</header>
 					<div class="content">
@@ -48,6 +46,6 @@
 				# ENDIF #
 			# END blogUserPost #
 			</div>
-			
+			<center><em>Ce blog à était vue {VIEWS} fois.</em></center>
 	</content>
 </section>

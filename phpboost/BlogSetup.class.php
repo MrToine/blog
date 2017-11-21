@@ -134,7 +134,8 @@ class BlogSetup extends DefaultModuleSetup
 			'about' => array('type' => 'string', 'lenght' => 65000, 'notnull' => 1, 'default' => "''"),
 			'description' => array('type' => 'text', 'length' => 65000),
 			'created' => array('type' => 'integer', 'lenght' => 11, 'notnull' => 1),
-			'approved' => array('type' => 'integer', 'lenght' => 1, 'notnull' => 1, 'default' => 0)
+			'approved' => array('type' => 'integer', 'lenght' => 1, 'notnull' => 1, 'default' => 0),
+			'views' => array('type' => 'integer', 'lenght' => 11, 'notnull' => 1, 'default' => 0)
 		);
 		$options_blog = array(
 			'primary' => array('id'),
@@ -161,7 +162,8 @@ class BlogSetup extends DefaultModuleSetup
 			'content' => array('type' => 'text', 'length' => 65000),
 			'created' => array('type' => 'integer', 'lenght' => 11, 'notnull' => 1),
 			'updated' => array('type' => 'integer', 'lenght' => 11, 'notnull' => 1),
-			'approved' => array('type' => 'integer', 'lenght' => 1, 'notnull' => 1, 'default' => 0)
+			'approved' => array('type' => 'integer', 'lenght' => 1, 'notnull' => 1, 'default' => 0),
+			'views' => array('type' => 'integer', 'lenght' => 11, 'notnull' => 1, 'default' => 0)
 		);
 		$options_articles = array(
 			'primary' => array('id'),
@@ -222,6 +224,10 @@ class BlogSetup extends DefaultModuleSetup
 				'notnull' => 1,
 				'default' => 0
 			),
+			'blogs_edito' => array(
+				'type' => 'text',
+				'lenght' => 65000
+			)
 		);
 
 		PersistenceContext::get_dbms_utils()->create_table(self::$blog_table['config'], $fields_config);
@@ -236,7 +242,7 @@ class BlogSetup extends DefaultModuleSetup
 			'id' => 1,
 			'author_id' => 1,
 			'name' => $this->blog['blog.name'],
-			'about' => "",
+			'about' => $this->blog['blog.about'],
 			'description' => $this->blog['blog.description'],
 			'created' => time(),
 			'approved' => 1,
@@ -262,7 +268,7 @@ class BlogSetup extends DefaultModuleSetup
 			'display_blogs' => 0,
 			'style_for_blog' => 1,
 			'menu_for_blog' => 1,
-			
+			'blogs_edito' => $this->blog['config.edito']
 		));
 	}
 

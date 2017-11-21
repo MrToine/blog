@@ -35,7 +35,8 @@ class BlogExtensionPointProvider extends ExtensionPointProvider
 	public function menus()
 	{
 		return new ModuleMenus(array(
-			new BlogModuleMiniMenu()
+			new BlogModuleMiniMenu(),
+			new BlogListModuleMiniMenu()
 		));
 	}
 

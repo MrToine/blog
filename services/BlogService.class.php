@@ -70,6 +70,7 @@ class BlogService
 	}
 
 	public static function update_blog(Blog $blog){
+
 		self::$db_querier->update(PREFIX.'blog', $blog->get_properties(), 'WHERE id=:id', array('id', $blog->get_id()));
 	}
 
@@ -79,7 +80,7 @@ class BlogService
 	}
 
 	public static function count_blogs(){
-		self::$db_querier->count(PREFIX.'blog');
+		return self::$db_querier->count(PREFIX.'blog');
 	}
 
 	public static function get_blog($blog_id)
@@ -123,7 +124,7 @@ class BlogService
 	}
 
 	public static function count_posts(){
-		self::$db_querier->count(PREFIX.'blog_articles');
+		return self::$db_querier->count(PREFIX.'blog_articles');
 	}
 
 	public static function get_post($post_id)
@@ -148,6 +149,10 @@ class BlogService
 		));
 		self::test($result, true);
 		return $result;
+	}
+
+	public static function count_comments($post_id){
+		return self::$db_querier->count(PREFIX.'comments_topic', 'WHERE module_id = "blog" AND id_in_module = '.$post_id);
 	}
 
 }

@@ -50,7 +50,6 @@ class BlogPostController extends ModuleController {
 		$this->blog_name = BlogService::get_blog($this->post->get_blog_id())->get_name();
 
 		/* Comments */ 
-
 		$comments_topic = new BlogCommentsTopic();
 		$comments_topic->set_id_in_module($this->post->get_id());
 		$comments_topic->set_url(BlogUrlBuilder::display_comments_posts($this->post->get_slug()));
@@ -74,7 +73,8 @@ class BlogPostController extends ModuleController {
 				'CREATE_POST_LINK' => BlogUrlBuilder::create_post($this->post->get_blog_id())->absolute(),
 				'USER_ID' => $result['user_id'],
 				'USER_LEVEL_CLASS' => UserService::get_level_class($result['level']),
-				'COMMENTS' => $comments_topic->display()
+				'COMMENTS' => $comments_topic->display(),
+				'NB_COMMENTS' => BlogService::count_comments($this->post->get_id())
 
 		));
 

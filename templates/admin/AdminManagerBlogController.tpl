@@ -1,3 +1,6 @@
+<div class="blog-expanded">
+    <span class="blog-nbr" style="font-weight:bold; font-size:20pt;float:right;"> {NB_BLOGS} Blog(s)</span>
+</div>
 <table>
 	<thead>
 		<th></th>

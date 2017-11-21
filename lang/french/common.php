@@ -40,6 +40,10 @@ $lang = array(
 	'add_post' => 'Ajouter un billet',
 	'edit_post' => 'Editer',
 	'list_posts' => 'Liste des billets',
+
+	//-> Generic
+	'module.views' => 'vues',
+	'module.comments' => 'commentaire(s)',
  
 	//->Liens administation
 	'admin.config' => 'Configuration des blogs',
@@ -68,9 +72,15 @@ $lang = array(
 	'admin.manager.blog.approved' => 'En ligne !',
 	'admin.manager.blog.not.approved' => 'Hors ligne !',
 
-	'donation' => 'Plus de 20 heures ont été nécessaire pour le développement de ce module. Si vous voulez soutenir le projet, et soutenir son créateur vous pouvez faire un don paypal via le bouton ci-dessous. Ce n\'est bien sûre pas obligatoire et même sans ce petit geste, je garanti des modules de qualité et un suivis personnel pour chaque utilisateurs du module. Mais un simple don permet d\'encourager et de remercier un créateur pour son travail. Anthony VIOLET',
+	'donation' => 'Plus de 20 heures ont été nécessaire pour le développement de ce module. Si vous voulez soutenir le projet, et soutenir son créateur vous pouvez faire un don paypal via le bouton ci-dessous. Ce n\'est bien sûre pas obligatoire et même sans ce petit geste, je garantie des modules de qualité et un suivis personnel pour chaque utilisateurs du module. Mais un simple don permet d\'encourager et de remercier un créateur pour son travail. Anthony VIOLET',
 
 	'mail.creator.module' => 'anthony.violet@outlook.be',
+
+	//-> Mini module
+	'mini.list.views' => 'Les blogs les plus vues',
+	'mini.list.last' => 'Les derniers blogs crées',
+	'mini.best.blogs' => 'Les meilleurs Blogs',
+
 	//->ACCUEIL
 	'home.view.list' => 'Voir la liste des Blogs',
 
@@ -105,6 +115,9 @@ $lang = array(
 	'manager.manage_posts_link' => '#',
 	'manager.delete_blog' => 'Supprimer mon blog',
 	'manager.delete_blog_link' => '#',
+	'manager.success.posted' => 'Billet posté',
+	'manager.success.edited' => 'Billet édité',
+	'manager.is.no.your.blog' => 'Ce n\'est pas ton blog',
 	//-->Formulaire
 	'manager.form.title' => 'Titre du billet',
 	'manager.form.title_desc' => 'Indiquez le titre du billet (max 255 caractères)',

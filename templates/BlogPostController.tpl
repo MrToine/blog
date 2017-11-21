@@ -24,7 +24,7 @@
 </section>
 <section>
 	<header>
-		<h1>Commentaires</h1>
+		<h1>Commentaires ({NB_COMMENTS})</h1>
 		<div class="more"></div>
 		# INCLUDE  COMMENTS #
 	</header>

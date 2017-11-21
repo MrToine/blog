@@ -36,7 +36,8 @@ class Blog {
 			$_end_date,
 			$_end_date_enabled,
 			$_created,
-			$_approved;
+			$_approved,
+			$_views;
 
 	public function get_id(){
 
@@ -104,6 +105,10 @@ class Blog {
 
 		return $this->_approved;
 
+	}
+
+	public function get_views(){
+		return (int) $this->_views;
 	}
 
 	public function set_id($id){
@@ -174,6 +179,13 @@ class Blog {
 
 	}
 
+	public function set_views($views){
+
+		$views = (int) $views;
+
+		$this->_views = $views;
+	}
+
 	public function is_authorized_edit()
 	{
 		/*return BlogAuthorizationsService::check_authorizations()->moderation() || (BlogAuthorizationsService::check_authorizations()->write() && $this->get_author_user()->get_id() == AppContext::get_current_user()->get_id() && AppContext::get_current_user()->check_level(User::MEMBER_LEVEL));*/
@@ -189,7 +201,8 @@ class Blog {
 			'about' => TextHelper::htmlspecialchars($this->get_about()),
 			'description' => TextHelper::htmlspecialchars($this->get_description()),
 			'created' => $this->get_created()->get_timestamp(),
-			'approved' => TextHelper::htmlspecialchars($this->get_approved())
+			'approved' => TextHelper::htmlspecialchars($this->get_approved()),
+			'views' => TextHelper::htmlspecialchars($this->get_views())
 		);
 	}
 	
@@ -200,8 +213,9 @@ class Blog {
 		$this->_name = $properties['name'];
 		$this->_about = $properties['about'];
 		$this->_description = $properties['description'];
-		$this->_created =new Date($properties['created'], Timezone::SERVER_TIMEZONE);
+		$this->_created = new Date($properties['created'], Timezone::SERVER_TIMEZONE);
 		$this->_approved = $properties['approved'];
+		$this->_views = $properties['views'];
 	}
 
 	public function get_array_tpl_vars()
@@ -216,6 +230,7 @@ class Blog {
 			'DESCRIPTION' => $this->_description,
 			'CREATED' => $this->get_start_date() != null ? $this->get_start_date()->get_timestamp() : $this->get_created()->get_timestamp(),
 			'APPROVED' => $this->_approved,
+			'VIEWS' => $this->_views
 		);
 	}
 

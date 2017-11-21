@@ -53,7 +53,7 @@ class AdminManagerBlogController extends AdminModuleController {
 				'USER_LEVEL_CLASS'=> UserService::get_level_class($row['level']),
 				'APPROVE_LINK' => BlogUrlBuilder::approve_blog($blog->get_id())->absolute(),
 				'DESAPPROVE_LINK' => BlogUrlBuilder::disapprove_blog($blog->get_id())->absolute(),
-				'DELETE_LINK' => BlogUrlBuilder::approve_blog($blog->get_id())->absolute(),
+				'DELETE_LINK' => BlogUrlBuilder::approve_blog($blog->get_id())->absolute()
 			));
 
 		}
@@ -64,6 +64,7 @@ class AdminManagerBlogController extends AdminModuleController {
 				'HEAD_USER' => $this->lang['head_user'],
 				'HEAD_NAME' => $this->lang['head_name'],
 				'HEAD_CREATED' => $this->lang['head_created'],
+				'NB_BLOGS' => BlogService::count_blogs()
 			));
 
 		return new AdminBlogDisplayResponse($this->view, $this->lang['config.module.manager']);

@@ -11,8 +11,14 @@ L'erreur actuelle viens de get_properties() qui ne peut pas etre null.
 ->Créer billet = ok
 ->mini menu admin (dans liste post et affichage d'un post) = ok
 
-----24-10-2014----
+----24-10-2017----
 ->Modification fichier BlogUserController: le lien vers la liste des billets fonctionne correctement.
+
+----28-10-2017----
+[list]
+[*]Le lien vers la liste des blogs de la page d'accueil passe après l'edito
+[*]Affichage du nombre de commentaires sur la liste des billets et sur l'affichage d'un billet
+[/list]
 
 +---------------------------------------------------------------------+
 |                                                                     |
@@ -20,7 +26,7 @@ L'erreur actuelle viens de get_properties() qui ne peut pas etre null.
 |                                                                     |
 +---------------------------------------------------------------------+
 Swan:
-1/ Par contre, y aura t-il une page d'accueil principale pour le module blog ? car là on arrive directement sur la liste des blogs existants.
+[FAIT !] 1/ Par contre, y aura t-il une page d'accueil principale pour le module blog ? car là on arrive directement sur la liste des blogs existants.
 
 2/ dans configuration (admin) -> information -> je garanti => je garantie
 
@@ -28,11 +34,11 @@ Swan:
 
 4/ Toujours dans cette partie , ajouter peut être le champ recherche des membres non ?
 
-5/ Un mini-module avec les blog les plus actifs ou les plus vu , une sorte de Hits / Top .
+[FAIT !]5/ Un mini-module avec les blog les plus actifs ou les plus vu , une sorte de Hits / Top .
 
 6/ Un flux rss pour chaque blog ( je sais pas si c'est possible). Comme ils ont fait pour les news ..
 
-7/ Voir dans l'administration le nombre total de blog créé / ou dans le mini-module. ( exemple: Notre site héberge XX Blog(s) )
+[FAIT !]7/ Voir dans l'administration le nombre total de blog créé / ou dans le mini-module. ( exemple: Notre site héberge XX Blog(s) )
 
 +---------------------------------------------------------------------+
 |                                                                     |
@@ -49,3 +55,14 @@ Swan:
 ->BlogController.class.php deviens unepage d'accueil
 ->La liste des blogs est dans BlogListController.class.php
 ->Modification et ajout des TPL en conséquences
+
+--------------------28/10/2017---------------------
+
+->config.ini (changement de version)
+->BlogController.tpl
+->AdminManagerBlogController.class.php
+->BlogService.class.php
+->BlogPostController.tpl
+->BlogUserController.class.php
+->BlogUserController.tpl
+->common.php (lang)
